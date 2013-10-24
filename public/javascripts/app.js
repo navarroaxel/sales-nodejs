@@ -1,7 +1,6 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-
 angular.module('sales', [
   'sales.controllers',
   'sales.filters',
@@ -10,12 +9,12 @@ angular.module('sales', [
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
-    when('/view1', {
-      templateUrl: 'partials/partial1',
+    when('/customers', {
+      templateUrl: 'views/list',
       controller: 'MyCtrl1'
     }).
-    when('/view2', {
-      templateUrl: 'partials/partial2',
+    when('/create', {
+      templateUrl: 'views/create',
       controller: 'MyCtrl2'
     }).
     otherwise({

@@ -5,7 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
+var customers = require('./routes/customers');
 var http = require('http');
 var path = require('path');
 
@@ -28,6 +28,11 @@ app.configure('development', function() {
 
 app.get('/', express.static(path.join(__dirname, 'public/index.html')));
 
+app.get('/api/customers', customers.list);
+app.get('/api/customers/:id', customers.get);
+app.post('/api/customers/', customers.create);
+app.put('/api/customers/:id', customers.update);
+app.delete('/api/customers/:id', customers.delete);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

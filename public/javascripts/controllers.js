@@ -5,10 +5,7 @@
 angular.module('sales.controllers', []).
   controller('AppCtrl', function ($scope, $http) {
 
-    $http({
-      method: 'GET',
-      url: '/api/name'
-    }).
+    $http.get('/api/name').
     success(function (data, status, headers, config) {
       $scope.name = data.name;
     }).
