@@ -1,17 +1,7 @@
-<html>
-<head>
-	<title>Sales app</title>
-	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-</head>
-<body>
-	<div ng-controller="AppCtrl">
-
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
-	<script src="javascripts/app.js"></script>
-	<script src="javascripts/services.js"></script>
-	<script src="javascripts/controllers.js"></script>
-	<script src="javascripts/filters.js"></script>
-	<script src="javascripts/directives.js"></script>
-</body>
-</html>
+<ul>
+	<li ng-repeat="customer in todos">
+		<span>{{customer.id}}</span>
+		<span>{{customer.name}}</span>
+		<span>{{customer.surname}}</span>
+	</li>
+</ul>

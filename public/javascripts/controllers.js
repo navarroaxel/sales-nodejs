@@ -1,17 +1,15 @@
 'use strict';
 
 /* Controllers */
-
 angular.module('sales.controllers', []).
-  controller('AppCtrl', function ($scope, $http) {
+  controller('CustomersCtrl', function ($scope, $http) {
 
-    $http.get('/api/name').
-    success(function (data, status, headers, config) {
-      $scope.name = data.name;
-    }).
-    error(function (data, status, headers, config) {
-      $scope.name = 'Error!'
-    });
+    $http.get('/api/customers')
+      .success(function (data, status, headers, config) {
+        $scope.customers = data;
+      }).error(function (data, status, headers, config) {
+        $scope.name = 'Error!'
+      });
 
   }).
   controller('MyCtrl1', function ($scope) {
