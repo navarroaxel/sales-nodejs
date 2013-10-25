@@ -50,4 +50,12 @@ controller('CustomersIndexCtrl', function ($scope, $http) {
             $location.path("/customers");
           });
       }
+  }).
+  controller('ProductsIndexCtrl', function ($scope, $http) {
+    $http.get('/api/products')
+      .success(function (data, status, headers, config) {
+        $scope.products = data;
+      }).error(function (data, status, headers, config) {
+        $scope.name = 'Error!'
+      });
   });

@@ -29,6 +29,10 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: '/views/customers/delete.html',
       controller: 'CustomersDeleteCtrl'
     }).
+    when('/products', {
+      templateUrl: 'views/products/list.html',
+      controller: 'ProductsIndexCtrl'
+    }).
     otherwise({
       redirectTo: '/'
     });
