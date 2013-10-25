@@ -33,7 +33,6 @@ app.put('/api/customers/:id', customers.update);
 app.delete('/api/customers/:id', customers.delete);
 
 app.get('/', express.static(path.join(__dirname, 'public/index.html')));
-app.get('*', express.static(path.join(__dirname, 'public/index.html')));
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

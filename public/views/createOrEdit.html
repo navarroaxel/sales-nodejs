@@ -1,3 +1,4 @@
+<h1>Customers</h1>
 <div ng-switch="!!customer.id">
     <h2 ng-switch-when="true">Edit</h2>
     <h2 ng-switch-when="false">New</h2>
@@ -8,4 +9,4 @@
 	<input type="text" ng-model="customer.surname" placeholder="surname"/>
 	<input type="submit" value="save"/>
 </form>
-<a href="/">back</a>
+<a ng-href="/customers">back</a>

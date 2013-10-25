@@ -10,14 +10,16 @@ angular.module('sales.controllers', []).
       }).error(function (data, status, headers, config) {
         $scope.name = 'Error!'
       });
-
   }).
-  controller('CustomersNewCtrl', function ($scope, $http) {
-      $scope.save = function(){
-        $http.post('/api/customers/', $scope.customer);
+  controller('CustomersNewCtrl', function ($scope, $http, $location) {
+      $scope.save = function() {
+        $http.post('/api/customers/', $scope.customer)
+        .success(function() {
+            $location.path("/customers");
+          });
       }
   }).
-  controller('CustomersEditCtrl', function ($scope, $http, $routeParams) {
+  controller('CustomersEditCtrl', function ($scope, $http, $location, $routeParams) {
    $http.get('/api/customers/'+$routeParams.id)
       .success(function (data, status, headers, config) {
         $scope.customer = data;
@@ -25,17 +27,25 @@ angular.module('sales.controllers', []).
         $scope.name = 'Error!'
       });
       $scope.save = function(){
-        $http.put("/api/customers/"+$routeParams.id, $scope.customer);
+        $http.put("/api/customers/"+$routeParams.id, $scope.customer)
+          .success(function() {
+            $location.path("/customers");
+          });
       }
   }).
-  controller('CustomersDeleteCtrl', function ($scope, $http, $routeParams) {
+  controller('CustomersDeleteCtrl', function ($scope, $http, $location, $routeParams) {
    $http.get('/api/customers/'+$routeParams.id)
       .success(function (data, status, headers, config) {
         $scope.customer = data;
       }).error(function (data, status, headers, config) {
         $scope.name = 'Error!'
       });
+      console.log($location);
       $scope.delete = function(){
-        $http.delete("/api/customers/"+$routeParams.id, $scope.customer);
+        $http.delete("/api/customers/"+$routeParams.id, $scope.customer)
+        .success(function() {
+      console.log($location);
+            $location.path("/customers");
+          });
       }
   });
