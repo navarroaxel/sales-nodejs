@@ -30,8 +30,8 @@ exports.create = function(req, res){
 exports.update = function(req, res){
 	for (var i = customers.length - 1; i >= 0; i--) {
 		if (customers[i].id == req.params.id){
-			customers[i].name = res.body.name;
-			customers[i].surname = res.body.surname;
+			customers[i].name = req.body.name;
+			customers[i].surname = req.body.surname;
 			return;
 		}
 	}

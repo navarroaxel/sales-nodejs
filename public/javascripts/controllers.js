@@ -2,7 +2,7 @@
 
 /* Controllers */
 angular.module('sales.controllers', []).
-  controller('CustomersCtrl', function ($scope, $http) {
+  controller('CustomersIndexCtrl', function ($scope, $http) {
 
     $http.get('/api/customers')
       .success(function (data, status, headers, config) {
@@ -12,11 +12,30 @@ angular.module('sales.controllers', []).
       });
 
   }).
-  controller('MyCtrl1', function ($scope) {
-    // write Ctrl here
-
+  controller('CustomersNewCtrl', function ($scope, $http) {
+      $scope.save = function(){
+        $http.post('/api/customers/', $scope.customer);
+      }
   }).
-  controller('MyCtrl2', function ($scope) {
-    // write Ctrl here
-
+  controller('CustomersEditCtrl', function ($scope, $http, $routeParams) {
+   $http.get('/api/customers/'+$routeParams.id)
+      .success(function (data, status, headers, config) {
+        $scope.customer = data;
+      }).error(function (data, status, headers, config) {
+        $scope.name = 'Error!'
+      });
+      $scope.save = function(){
+        $http.put("/api/customers/"+$routeParams.id, $scope.customer);
+      }
+  }).
+  controller('CustomersDeleteCtrl', function ($scope, $http, $routeParams) {
+   $http.get('/api/customers/'+$routeParams.id)
+      .success(function (data, status, headers, config) {
+        $scope.customer = data;
+      }).error(function (data, status, headers, config) {
+        $scope.name = 'Error!'
+      });
+      $scope.delete = function(){
+        $http.delete("/api/customers/"+$routeParams.id, $scope.customer);
+      }
   });

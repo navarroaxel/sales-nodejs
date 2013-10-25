@@ -11,11 +11,19 @@ config(function ($routeProvider, $locationProvider) {
   $routeProvider.
     when('/', {
       templateUrl: 'views/list.html',
-      controller: 'CustomersCtrl'
+      controller: 'CustomersIndexCtrl'
     }).
     when('/create', {
-      templateUrl: 'views/create',
-      controller: 'MyCtrl2'
+      templateUrl: '/views/createOrEdit.html',
+      controller: 'CustomersNewCtrl'
+    }).
+    when('/edit/:id', {
+      templateUrl: '/views/createOrEdit.html',
+      controller: 'CustomersEditCtrl'
+    }).
+    when('/delete/:id', {
+      templateUrl: '/views/delete.html',
+      controller: 'CustomersDeleteCtrl'
     }).
     otherwise({
       redirectTo: '/'
