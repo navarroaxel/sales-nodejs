@@ -2,8 +2,10 @@
 
 /* Controllers */
 angular.module('sales.controllers', []).
+controller('CustomersIndexCtrl', function ($scope, $http) {
+    
+  }).
   controller('CustomersIndexCtrl', function ($scope, $http) {
-
     $http.get('/api/customers')
       .success(function (data, status, headers, config) {
         $scope.customers = data;

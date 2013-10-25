@@ -9,20 +9,24 @@ angular.module('sales', [
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
+    when('/', {
+      templateUrl: 'views/home.html',
+      controller: 'HomeCtrl'
+    }).
     when('/customers', {
-      templateUrl: 'views/list.html',
+      templateUrl: 'views/customers/list.html',
       controller: 'CustomersIndexCtrl'
     }).
     when('/customers/create', {
-      templateUrl: '/views/createOrEdit.html',
+      templateUrl: '/views/customers/createOrEdit.html',
       controller: 'CustomersNewCtrl'
     }).
     when('/customers/edit/:id', {
-      templateUrl: '/views/createOrEdit.html',
+      templateUrl: '/views/customers/createOrEdit.html',
       controller: 'CustomersEditCtrl'
     }).
     when('/customers/delete/:id', {
-      templateUrl: '/views/delete.html',
+      templateUrl: '/views/customers/delete.html',
       controller: 'CustomersDeleteCtrl'
     }).
     otherwise({
