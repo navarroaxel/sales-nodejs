@@ -1,0 +1,11 @@
+<div ng-switch="!!customer.id">
+    <h2 ng-switch-when="true">Edit</h2>
+    <h2 ng-switch-when="false">New</h2>
+</div>
+<form ng-submit="save()">
+	<input type="hidden" ng-model="customer.id"/>
+	<input type="text" ng-model="customer.name" placeholder="name"/>
+	<input type="text" ng-model="customer.surname" placeholder="surname"/>
+	<input type="submit" value="save"/>
+</form>
+<a href="/">back</a>
