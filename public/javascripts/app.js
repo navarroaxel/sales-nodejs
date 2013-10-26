@@ -33,6 +33,18 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: 'views/products/list.html',
       controller: 'ProductsIndexCtrl'
     }).
+    when('/products/create', {
+      templateUrl: '/views/customers/createOrEdit.html',
+      controller: 'ProductsNewCtrl'
+    }).
+    when('/products/edit/:id', {
+      templateUrl: '/views/products/createOrEdit.html',
+      controller: 'ProductsEditCtrl'
+    }).
+    when('/products/delete/:id', {
+      templateUrl: '/views/products/delete.html',
+      controller: 'ProductsDeleteCtrl'
+    }).
     otherwise({
       redirectTo: '/'
     });
