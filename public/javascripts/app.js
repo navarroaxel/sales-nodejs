@@ -34,7 +34,7 @@ config(function ($routeProvider, $locationProvider) {
       controller: 'ProductsIndexCtrl'
     }).
     when('/products/create', {
-      templateUrl: '/views/customers/createOrEdit.html',
+      templateUrl: '/views/products/createOrEdit.html',
       controller: 'ProductsNewCtrl'
     }).
     when('/products/edit/:id', {

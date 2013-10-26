@@ -1,8 +1,9 @@
 'use strict';
 
+
 /* Controllers */
 angular.module('sales.controllers', []).
-controller('CustomersIndexCtrl', function ($scope, $http) {
+controller('HomeCtrl', function ($scope, $http) {
     
   }).
   controller('CustomersIndexCtrl', function ($scope, $http) {
@@ -58,4 +59,42 @@ controller('CustomersIndexCtrl', function ($scope, $http) {
       }).error(function (data, status, headers, config) {
         $scope.name = 'Error!'
       });
+  }).
+  controller('ProductsNewCtrl', function ($scope, $http, $location) {
+      $scope.save = function() {
+        $http.post('/api/products/', $scope.product)
+        .success(function() {
+            $location.path("/products");
+          });
+      }
+  }).
+  controller('ProductsEditCtrl', function ($scope, $http, $location, $routeParams) {
+   $http.get('/api/product/'+$routeParams.id)
+      .success(function (data, status, headers, config) {
+        $scope.product = data;
+      }).error(function (data, status, headers, config) {
+        $scope.name = 'Error!'
+      });
+      $scope.save = function(){
+        $http.put("/api/products/"+$routeParams.id, $scope.product)
+          .success(function() {
+            $location.path("/products");
+          });
+      }
+  }).
+  controller('ProductsDeleteCtrl', function ($scope, $http, $location, $routeParams) {
+   $http.get('/api/products/'+$routeParams.id)
+      .success(function (data, status, headers, config) {
+        $scope.product = data;
+      }).error(function (data, status, headers, config) {
+        $scope.name = 'Error!'
+      });
+      console.log($location);
+      $scope.delete = function(){
+        $http.delete("/api/products/"+$routeParams.id, $scope.product)
+        .success(function() {
+      console.log($location);
+            $location.path("/products");
+          });
+      }
   });

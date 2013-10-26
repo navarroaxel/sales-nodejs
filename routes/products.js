@@ -6,7 +6,7 @@ var products=[
 var id = 3;
 
 exports.list = function(req,res){
-	res.join(products);
+	res.json(products);
 }
 
 exports.get = function(req,res){
@@ -20,12 +20,12 @@ exports.get = function(req,res){
 
 exports.create = function(req,res){
 	products.push({
-  	id:id++,
-  	name:req.body.name,
-  	stock:req.body.stock,
-  	price: req.body.price,
-  });  
-  res.end();
+		id:id++,
+		name:req.body.name,
+		stock:req.body.stock,
+		price: req.body.price,
+	});  
+	res.end();
 }
 
 exports.update = function(req,res){

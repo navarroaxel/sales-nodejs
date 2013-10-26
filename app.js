@@ -9,7 +9,7 @@ var customers = require('./routes/customers');
 var products = require('./routes/products');
 var http = require('http');
 var path = require('path');
-
+var fs = require('fs');
 var app = express();
 
 // all environments
@@ -21,6 +21,16 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next){
+	if (req.method != 'GET'){
+		next();
+		return;
+	}
+	fs.readFile(path.join(__dirname, 'public/index.html'), 'utf8', function(err, text){
+        res.send(text);
+    });	
+});
 
 // development only
 app.configure('development', function() {
@@ -39,9 +49,6 @@ app.post('/api/products/', products.create);
 app.put('/api/products/:id', products.update);
 app.delete('/api/products/:id', products.delete);
 
-app.get('/', express.static(path.join(__dirname, 'public/index.html')));
-
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-co
