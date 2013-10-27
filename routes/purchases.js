@@ -1,7 +1,9 @@
+var PurchaseStatus = require('../models/enums.js');
 var purchases = [
 	{
 		id: 1,
 		date: new Date(),
+		status: PurchaseStatus.IN_PROGRESS,
 		customer: {
 			id: 1,
 			name:"Carlos",
