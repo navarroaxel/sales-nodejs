@@ -34,9 +34,10 @@ exports.get = function(req, res){
 
 exports.create = function(req, res){
   purchases.push({
-  	id:id++,
-  	name:req.body.name,
-  	surname:req.body.surname
+  	id: id++,
+  	status: PurchaseStatus.IN_PROGRESS,
+  	name: req.body.name,
+  	surname: req.body.surname
   });  
   res.end();
 };
