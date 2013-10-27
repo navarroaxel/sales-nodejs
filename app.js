@@ -5,12 +5,14 @@
 
 var express = require('express');
 var routes = require('./routes');
+require('mongoose').connect('mongodb://localhost/sales');
 var customers = require('./routes/customers');
 var products = require('./routes/products');
 var purchases = require('./routes/purchases');
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
+
 var app = express();
 
 // all environments

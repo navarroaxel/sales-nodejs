@@ -1,51 +1,46 @@
-var products=[
-	{id:1, name:"Tv", stock:3, price: 1499.99},
-	{id:2, name:"Radio", stock:9, price: 50}
-];
-
-var id = 3;
+var Product = require('../models/Product.js');
 
 exports.list = function(req,res){
-	res.json(products);
+	Product.find({}, function(err, products) {
+		if (err) return next(err);
+		res.json(products);
+	});
 }
 
 exports.get = function(req,res){
-	for (var i = products.length - 1; i >= 0; i--) {
-		if (products[i].id == req.params.id){
-			 res.json(products[i]);
-			 return;
-		}
-	}
+	Product.findById(req.params.id, function(err, product) {
+		if (err) return next(err);
+		res.json(product);
+	});
 }
 
 exports.create = function(req,res){
-	products.push({
-		id:id++,
-		name:req.body.name,
-		stock:req.body.stock,
-		price: req.body.price,
-	});  
-	res.end();
+	Product.create({
+	  	name: req.body.name,
+	  	stock: req.body.stock,
+	  	price: req.body.price
+  	}, function(err, product) {
+  		if (err) return next(err);
+		res.end();
+  	});
 }
 
 exports.update = function(req,res){
-	for (var i = products.length - 1; i >= 0; i--) {
-		if (products[i].id == req.params.id){
-			products[i].name = req.body.name;
-			products[i].stock = req.body.stock;
-			products[i].price = req.body.price;
-			res.end();
-			return;
-		}
-	}
+	Product.findById(req.params.id, function(err, product) {
+		if (err) return next(err);
+		Product.name = req.body.name;
+		Product.stock = req.body.stock;
+		Product.price = req.body.price;
+		Product.save();
+		res.end();
+	});
 }
 
-exports.delete = function(req,res){
-	for (var i = products.length - 1; i >= 0; i--) {
-		if (products[i].id == req.params.id) {
-			products.splice(i,1);
-			res.end();
-			return;
-		}
-	}
+exports.delete = function(req, res){
+	Product.findById(req.params.id, function(err, product) {
+		if (err) return next(err);
+		product.deleted = true;
+		product.save();
+		res.end();
+	});
 }

@@ -1,12 +1,11 @@
 <h1>Purchases</h1>
 <ul>
 	<li ng-repeat="purchase in purchases">
-		<span>{{purchase.id}}</span>
 		<span>{{purchase.customer.name}}</span>
 		<span>{{purchase.customer.surname}}</span>
 		<span>{{purchase.date | date:'yyyy-MM-dd HH:mm'}}</span>
 		<span>{{purchase.status}}</span>
-		<a ng-href="/products/delete/{{purchase.id}}">delete</a>
+		<a ng-href="/products/delete/{{purchase._id}}">delete</a>
 	</li>
 </ul>
 <a ng-href="/products/create">new</a>

@@ -69,7 +69,7 @@ controller('HomeCtrl', function ($scope, $http) {
       }
   }).
   controller('ProductsEditCtrl', function ($scope, $http, $location, $routeParams) {
-   $http.get('/api/product/'+$routeParams.id)
+   $http.get('/api/products/'+$routeParams.id)
       .success(function (data, status, headers, config) {
         $scope.product = data;
       }).error(function (data, status, headers, config) {
@@ -108,7 +108,7 @@ controller('HomeCtrl', function ($scope, $http) {
   }).
   controller('PurchasesNewCtrl', function ($scope, $http, $location) {
       $scope.save = function() {
-        $http.post('/api/purchases/', $scope.customer)
+        $http.post('/api/purchases/', $scope.purchase)
         .success(function() {
             $location.path("/purchases");
           });
@@ -117,7 +117,7 @@ controller('HomeCtrl', function ($scope, $http) {
   controller('PurchasesDeleteCtrl', function ($scope, $http, $location, $routeParams) {
    $http.get('/api/purchases/'+$routeParams.id)
       .success(function (data, status, headers, config) {
-        $scope.product = data;
+        $scope.purchase = data;
       }).error(function (data, status, headers, config) {
         $scope.name = 'Error!'
       });

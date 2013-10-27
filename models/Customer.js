@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/sales');
 
 var schema = new mongoose.Schema({
     name: String,
-    surname: String
+    surname: String,
+    deleted: { type: Boolean, default: false }
 });
 
 module.exports = mongoose.model('Customer', schema);

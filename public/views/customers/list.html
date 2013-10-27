@@ -1,11 +1,10 @@
 <h1>Customers</h1>
 <ul>
 	<li ng-repeat="customer in customers">
-		<span>{{customer.id}}</span>
 		<span>{{customer.name}}</span>
 		<span>{{customer.surname}}</span>
-		<a ng-href="/customers/edit/{{customer.id}}">edit</a>
-		<a ng-href="/customers/delete/{{customer.id}}">delete</a>
+		<a ng-href="/customers/edit/{{customer._id}}">edit</a>
+		<a ng-href="/customers/delete/{{customer._id}}">delete</a>
 	</li>
 </ul>
 <a ng-href="/customers/create">new</a>

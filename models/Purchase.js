@@ -1,16 +1,16 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/sales');
 
 var schema = new mongoose.Schema({
     name: String,
     date: { type: Date, default: Date.now },
     status: Number,
-    customer_id: Schema.ObjectId,
+    deleted: { type: Boolean, default: false },
+    customer_id: mongoose.Schema.ObjectId,
     products: {
-    	product_id: Schema.ObjectId,
+    	product_id: mongoose.Schema.ObjectId,
     	quantity: Number,
     	price: Number
     }
 });
 
-module.exports = mongoose.model('Product', schema);
+module.exports = mongoose.model('Purchase', schema);

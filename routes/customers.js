@@ -1,49 +1,44 @@
-var customers=[
-	{id:1, name:"Carlos", surname:"Suarez"},
-	{id:2, name:"Juan", surname:"Perez"}
-];
-
-var id = 3;
+var Customer = require('../models/Customer.js');
 
 exports.list = function(req, res){
-  res.json(customers);
+  	Customer.find({}, function(err, customers) {
+		if (err) return next(err);
+		res.json(customers);
+	});
 };
 
 exports.get = function(req, res){
-	for (var i = customers.length - 1; i >= 0; i--) {
-		if (customers[i].id == req.params.id){
-			 res.json(customers[i]);
-			 return;
-		}
-	}
+	Customer.findById(req.params.id, function(err, customer) {
+		if (err) return next(err);
+		res.json(customer);
+	});
 };
 
 exports.create = function(req, res){
-  customers.push({
-  	id:id++,
-  	name:req.body.name,
-  	surname:req.body.surname
-  });  
-  res.end();
+	Customer.create({
+	  	name: req.body.name,
+	  	surname: req.body.surname
+  	}, function(err, customer) {
+  		if (err) return next(err);
+		res.end();
+  	});
 };
 
 exports.update = function(req, res){
-	for (var i = customers.length - 1; i >= 0; i--) {
-		if (customers[i].id == req.params.id){
-			customers[i].name = req.body.name;
-			customers[i].surname = req.body.surname;
-			res.end();
-			return;
-		}
-	}
+	Customer.findById(req.params.id, function(err, customer) {
+		if (err) return next(err);
+		customer.name = req.body.name;
+		customer.surname = req.body.surname;
+		customer.save();
+		res.end();
+	});
 };
 
 exports.delete = function(req, res){
-	for (var i = customers.length - 1; i >= 0; i--) {
-		if (customers[i].id == req.params.id) {
-			customers.splice(i,1);
-			res.end();
-			return;
-		}
-	}
+	Customer.findById(req.params.id, function(err, customer) {
+		if (err) return next(err);
+		customer.deleted = true;
+		customer.save();
+		res.end();
+	});
 };
