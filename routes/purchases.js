@@ -16,6 +16,35 @@ var purchases = [
 	}
 ];
 
+var id = 2;
 exports.list = function(req,res){
 	res.json(products);
 }
+
+exports.get = function(req, res){
+	for (var i = purchases.length - 1; i >= 0; i--) {
+		if (purchases[i].id == req.params.id) {
+			 res.json(purchases[i]);
+			 return;
+		}
+	}
+};
+
+exports.create = function(req, res){
+  purchases.push({
+  	id:id++,
+  	name:req.body.name,
+  	surname:req.body.surname
+  });  
+  res.end();
+};
+
+exports.delete = function(req, res){
+	for (var i = purchases.length - 1; i >= 0; i--) {
+		if (purchases[i].id == req.params.id) {
+			purchases.splice(i, 1);
+			res.end();
+			return;
+		}
+	}
+};

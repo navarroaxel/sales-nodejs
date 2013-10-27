@@ -45,6 +45,18 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: '/views/products/delete.html',
       controller: 'ProductsDeleteCtrl'
     }).
+    when('/purchases', {
+      templateUrl: 'views/purchases/list.html',
+      controller: 'PurchasesIndexCtrl'
+    }).
+    when('/purchases/create', {
+      templateUrl: '/views/purchases/createOrEdit.html',
+      controller: 'PurchasesNewCtrl'
+    }).
+    when('/purchases/delete/:id', {
+      templateUrl: '/views/purchases/delete.html',
+      controller: 'PurchasesDeleteCtrl'
+    }).
     otherwise({
       redirectTo: '/'
     });

@@ -51,6 +51,9 @@ app.put('/api/products/:id', products.update);
 app.delete('/api/products/:id', products.delete);
 
 app.get('/api/purchases', purchases.list);
+app.get('/api/products/:id', products.get);
+app.post('/api/products/', products.create);
+app.delete('/api/products/:id', products.delete);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
