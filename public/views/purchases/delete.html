@@ -1,0 +1,29 @@
+<h1>Purchases</h1>
+<h2>Delete</h2>
+<div>
+	<b>ID</b>
+	<span>{{purchase.id}}</span>
+</div>
+<div>
+	<b>Customer</b>
+	<span>{{purchase.customer.name}} {{purchase.customer.surname}}</span>
+</div>
+<div>
+	<b>Date</b>
+	<span>{{purchase.date}}</span>
+</div>
+<div>
+	<b>Products</b>
+	<ul>
+		<li ng-repeat="product in purchase.products">
+			<span>{{product.id}}</span>
+			<span>{{product.name}}</span>
+			<span>{{product.quantity}}</span>
+			<span>{{product.price}}</span>
+		</li>
+	</ul>
+</div>
+<form ng-submit="delete()">
+	<input type="submit" value="delete"/>
+</form>
+<a href="/products">back</a>

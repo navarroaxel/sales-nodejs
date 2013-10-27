@@ -97,4 +97,12 @@ controller('HomeCtrl', function ($scope, $http) {
             $location.path("/products");
           });
       }
+  }).
+  controller('PurchasesIndexCtrl', function ($scope, $http) {
+    $http.get('/api/purchases')
+      .success(function (data, status, headers, config) {
+        $scope.purchases = data;
+      }).error(function (data, status, headers, config) {
+        $scope.name = 'Error!'
+      });
   });

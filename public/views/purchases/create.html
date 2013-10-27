@@ -1,0 +1,8 @@
+<h1>Purchases</h1>
+<h2>New</h2>
+<form ng-submit="save()">
+	<input type="hidden" ng-model="purchase.id"/>
+	<input type="text" ng-model="purchase.name" placeholder="name"/>
+	<input type="submit" value="save"/>
+</form>
+<a ng-href="/products">back</a>

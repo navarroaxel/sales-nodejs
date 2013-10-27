@@ -7,6 +7,7 @@ var express = require('express');
 var routes = require('./routes');
 var customers = require('./routes/customers');
 var products = require('./routes/products');
+var purchases = require('./routes/purchases');
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
@@ -23,7 +24,7 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next){
-	if (req.method != 'GET'){
+	if (req.method != 'GET') {
 		next();
 		return;
 	}
@@ -48,6 +49,8 @@ app.get('/api/products/:id', products.get);
 app.post('/api/products/', products.create);
 app.put('/api/products/:id', products.update);
 app.delete('/api/products/:id', products.delete);
+
+app.get('/api/purchases', purchases.list);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
