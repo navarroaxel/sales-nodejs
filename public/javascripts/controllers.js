@@ -105,7 +105,7 @@ controller('HomeCtrl', function ($scope, $http) {
       }).error(function (data, status, headers, config) {
         $scope.name = 'Error!'
       });
-  })
+  }).
   controller('PurchasesNewCtrl', function ($scope, $http, $location) {
       $scope.save = function() {
         $http.post('/api/purchases/', $scope.customer)

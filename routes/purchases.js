@@ -1,4 +1,4 @@
-var PurchaseStatus = require('../models/enums.js');
+var PurchaseStatus = require('../models/enums.js').PurchaseStatus;
 var purchases = [
 	{
 		id: 1,
@@ -20,7 +20,7 @@ var purchases = [
 
 var id = 2;
 exports.list = function(req,res){
-	res.json(products);
+	res.json(purchases);
 }
 
 exports.get = function(req, res){
