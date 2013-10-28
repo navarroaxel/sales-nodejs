@@ -12,8 +12,14 @@
 		</select>
 		<span>{{purchaseQuantity * purchaseProduct.price}}</span>
 		<input type="button" ng-click="addProduct()" value="add product" />
-		<ul ng-repeat="purchasedProduct in purchasedProducts">
+		<ul>
 			<li>
+				<b>Quantity</b>
+				<b>Product</b>
+				<b>Unit price</b>
+				<b>Subtotal</b>
+			</li>
+			<li ng-repeat="purchasedProduct in purchasedProducts">
 				<span>{{purchasedProduct.quantity}}</span>
 				<span>{{purchasedProduct.product.name}}</span>
 				<span>{{purchasedProduct.product.price}}</span>
