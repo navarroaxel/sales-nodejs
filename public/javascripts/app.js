@@ -50,7 +50,7 @@ config(function ($routeProvider, $locationProvider) {
       controller: 'PurchasesIndexCtrl'
     }).
     when('/purchases/create', {
-      templateUrl: '/views/purchases/createOrEdit.html',
+      templateUrl: '/views/purchases/create.html',
       controller: 'PurchasesNewCtrl'
     }).
     when('/purchases/delete/:id', {

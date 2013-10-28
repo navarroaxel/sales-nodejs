@@ -5,7 +5,7 @@
 		<span>{{purchase.customer.surname}}</span>
 		<span>{{purchase.date | date:'yyyy-MM-dd HH:mm'}}</span>
 		<span>{{purchase.status}}</span>
-		<a ng-href="/products/delete/{{purchase._id}}">delete</a>
+		<a ng-href="/purchases/delete/{{purchase._id}}">delete</a>
 	</li>
 </ul>
-<a ng-href="/products/create">new</a>
+<a ng-href="/purchases/create">new</a>

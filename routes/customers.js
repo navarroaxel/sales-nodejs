@@ -1,20 +1,20 @@
 var Customer = require('../models/Customer.js');
 
-exports.list = function(req, res){
+exports.list = function(req, res, next) {
   	Customer.find({}, function(err, customers) {
 		if (err) return next(err);
 		res.json(customers);
 	});
 };
 
-exports.get = function(req, res){
+exports.get = function(req, res, next) {
 	Customer.findById(req.params.id, function(err, customer) {
 		if (err) return next(err);
 		res.json(customer);
 	});
 };
 
-exports.create = function(req, res){
+exports.create = function(req, res, next) {
 	Customer.create({
 	  	name: req.body.name,
 	  	surname: req.body.surname
@@ -24,7 +24,7 @@ exports.create = function(req, res){
   	});
 };
 
-exports.update = function(req, res){
+exports.update = function(req, res, next) {
 	Customer.findById(req.params.id, function(err, customer) {
 		if (err) return next(err);
 		customer.name = req.body.name;
@@ -34,7 +34,7 @@ exports.update = function(req, res){
 	});
 };
 
-exports.delete = function(req, res){
+exports.delete = function(req, res, next) {
 	Customer.findById(req.params.id, function(err, customer) {
 		if (err) return next(err);
 		customer.deleted = true;

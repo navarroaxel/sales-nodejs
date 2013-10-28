@@ -20,7 +20,7 @@ controller('HomeCtrl', function ($scope, $http) {
         .success(function() {
           $location.path("/customers");
         });
-    }
+    };
   }).
   controller('CustomersEditCtrl', function ($scope, $http, $location, $routeParams) {
     $http.get('/api/customers/'+$routeParams.id)
@@ -34,7 +34,7 @@ controller('HomeCtrl', function ($scope, $http) {
         .success(function() {
           $location.path("/customers");
         });
-    }
+    };
   }).
   controller('CustomersDeleteCtrl', function ($scope, $http, $location, $routeParams) {
    $http.get('/api/customers/'+$routeParams.id)
@@ -50,7 +50,7 @@ controller('HomeCtrl', function ($scope, $http) {
             console.log($location);
             $location.path("/customers");
           });
-      }
+      };
   }).
   controller('ProductsIndexCtrl', function ($scope, $http) {
     $http.get('/api/products')
@@ -66,7 +66,7 @@ controller('HomeCtrl', function ($scope, $http) {
         .success(function() {
             $location.path("/products");
           });
-      }
+      };
   }).
   controller('ProductsEditCtrl', function ($scope, $http, $location, $routeParams) {
    $http.get('/api/products/'+$routeParams.id)
@@ -80,7 +80,7 @@ controller('HomeCtrl', function ($scope, $http) {
           .success(function() {
             $location.path("/products");
           });
-      }
+      };
   }).
   controller('ProductsDeleteCtrl', function ($scope, $http, $location, $routeParams) {
    $http.get('/api/products/'+$routeParams.id)
@@ -89,14 +89,12 @@ controller('HomeCtrl', function ($scope, $http) {
       }).error(function (data, status, headers, config) {
         $scope.name = 'Error!'
       });
-      console.log($location);
       $scope.delete = function(){
         $http.delete("/api/products/"+$routeParams.id, $scope.product)
-        .success(function() {
-      console.log($location);
+          .success(function() {
             $location.path("/products");
           });
-      }
+      };
   }).
   controller('PurchasesIndexCtrl', function ($scope, $http) {
     $http.get('/api/purchases')
@@ -107,12 +105,34 @@ controller('HomeCtrl', function ($scope, $http) {
       });
   }).
   controller('PurchasesNewCtrl', function ($scope, $http, $location) {
-      $scope.save = function() {
-        $http.post('/api/purchases/', $scope.purchase)
+    $scope.purchasedProducts = [];
+    $http.get('/api/purchases/create')
+      .success(function (data, status, headers, config) {
+        $scope.customers = data.customers;
+        $scope.products = data.products;
+      }).error(function (data, status, headers, config) {
+        $scope.name = 'Error!'
+      });
+    $scope.addProduct = function(){
+      console.log($scope.purchaseProduct);
+      $scope.purchasedProducts.push({
+        quantity: $scope.purchaseQuantity,
+        product: $scope.purchaseProduct,
+      });
+    };
+    $scope.total = function(){
+      var total = 0;
+      angular.forEach($scope.purchasedProducts, function(product){
+        total += product.quantity * product.product.price;
+      });
+      return total;
+    }
+    $scope.save = function() {
+      $http.post('/api/purchases/', $scope.purchase)
         .success(function() {
-            $location.path("/purchases");
-          });
-      }
+          $location.path("/purchases");
+        });
+    };
   }).
   controller('PurchasesDeleteCtrl', function ($scope, $http, $location, $routeParams) {
    $http.get('/api/purchases/'+$routeParams.id)
@@ -121,12 +141,11 @@ controller('HomeCtrl', function ($scope, $http) {
       }).error(function (data, status, headers, config) {
         $scope.name = 'Error!'
       });
-      console.log($location);
       $scope.delete = function() {
         $http.delete("/api/purchases/"+$routeParams.id, $scope.product)
           .success(function() {
             console.log($location);
             $location.path("/purchases");
           });
-      }
+      };
   });

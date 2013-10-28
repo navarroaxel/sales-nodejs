@@ -53,6 +53,7 @@ app.put('/api/products/:id', products.update);
 app.delete('/api/products/:id', products.delete);
 
 app.get('/api/purchases', purchases.list);
+app.get('/api/purchases/create', purchases.createInitLoad);
 app.get('/api/purchases/:id', purchases.get);
 app.post('/api/purchases/', purchases.create);
 app.delete('/api/purchases/:id', purchases.delete);
