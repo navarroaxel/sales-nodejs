@@ -113,14 +113,13 @@ controller('HomeCtrl', function ($scope, $http) {
       }).error(function (data, status, headers, config) {
         $scope.name = 'Error!'
       });
-    $scope.addProduct = function(){
-      console.log($scope.purchaseProduct);
+    $scope.addProduct = function() {
       $scope.purchasedProducts.push({
         quantity: $scope.purchaseQuantity,
         product: $scope.purchaseProduct,
       });
     };
-    $scope.total = function(){
+    $scope.total = function() {
       var total = 0;
       angular.forEach($scope.purchasedProducts, function(product){
         total += product.quantity * product.product.price;

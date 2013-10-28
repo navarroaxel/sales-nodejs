@@ -12,6 +12,9 @@
 	<span>{{purchaseQuantity * purchaseProduct.price}}</span>
 	<input type="button" ng-click="addProduct()" value="add product" />
 	<ul ng-repeat="purchasedProduct in purchasedProducts">
+		<header ng-repeat-start>
+			Carlos
+		</header>
 		<li>
 			<span>{{purchasedProduct.quantity}}</span>
 			<span>{{purchasedProduct.product.name}}</span>

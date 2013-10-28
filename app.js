@@ -4,6 +4,7 @@
  */
 
 var express = require('express');
+var lessMiddleware = require('less-middleware');
 var routes = require('./routes');
 require('mongoose').connect('mongodb://localhost/sales');
 var customers = require('./routes/customers');
@@ -23,6 +24,10 @@ app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
+app.use(lessMiddleware({
+	src: path.join(__dirname, 'public'),
+    compress: true
+  }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next){
