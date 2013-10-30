@@ -1,7 +1,11 @@
-@container: #31353D;
-@body: #F6FFE0;
-@button: #445878;
-@buttonHover: #107bd5;
+@container: #0785AB;
+@menu: #42484D;
+@body: #14A7C8;
+@button: #42484D;
+@buttonHover: gray;
+@rowHeader: #42484D;
+@rowOdd: white;
+@rowEven: #EAEAEA;
 
 @font-face {
   font-family:"Caviar Dreams";
@@ -24,11 +28,11 @@ body {
   		clear: both;
   	}
 	.tab{
-		background-color: @container; 
+		background-color: @menu; 
 		padding: 15px;
 		a {
+			color: white;
 			padding: 15px;
-			border: 0px solid black;
 			&:hover{
 				background-color: @buttonHover;
 			}
@@ -44,10 +48,9 @@ body {
 				float: left;
 				width: 180px;
 				height: 30px;
-				background-color: #1C1D21;
+				background-color: @rowHeader;
 				text-align: center;
-				border: 1px solid @body;
-				color: black;
+				color: white;
 			}
 		}
 		.itemList{
@@ -57,25 +60,25 @@ body {
 				width: 180px;
 				height: 30px;
 				text-align: center;
-				border: 1px solid @body;
 			}
 		}
 		.odd div{
-			background-color: #EEEFF7;
+			background-color: @rowOdd;
 		}
 		.even div{
-			background-color: #B4E8E8;
+			background-color: @rowEven;
 		}
 	}
 	.button{
-		  padding: 5px 10px;
-		  background-color: @button;
-		  margin: 0px 10px;
-		  &:hover {
-		  background-color: @buttonHover;
+		padding: 5px 10px;
+		background-color: @button;
+	 	margin: 0px 10px;
+	 	color:white;
+	  	&:hover {
+			background-color: @buttonHover;
 		}
-		img{
+		img {
 		  	margin-bottom: -3px;
-		  }
+	  	}
 	}
 }
