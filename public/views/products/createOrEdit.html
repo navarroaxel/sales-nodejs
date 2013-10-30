@@ -1,13 +1,15 @@
-<h1>Products</h1>
-<div ng-switch="!!product._id">
-    <h2 ng-switch-when="true">Edit</h2>
-    <h2 ng-switch-when="false">New</h2>
+<div class="container">
+	<h1>Products</h1>
+	<div ng-switch="!!product._id">
+	    <h2 ng-switch-when="true">Edit</h2>
+	    <h2 ng-switch-when="false">New</h2>
+	</div>
+	<form ng-submit="save()">
+		<input type="hidden" ng-model="product._id"/>
+		<input type="text" ng-model="product.name" placeholder="name"/>
+		<input type="text" ng-model="product.stock" placeholder="stock"/>
+		<input type="text" ng-model="product.price" placeholder="price"/>
+		<input type="submit" value="save"/>
+	</form>
+	<a ng-href="/products">back</a>
 </div>
-<form ng-submit="save()">
-	<input type="hidden" ng-model="product._id"/>
-	<input type="text" ng-model="product.name" placeholder="name"/>
-	<input type="text" ng-model="product.stock" placeholder="stock"/>
-	<input type="text" ng-model="product.price" placeholder="price"/>
-	<input type="submit" value="save"/>
-</form>
-<a ng-href="/products">back</a>

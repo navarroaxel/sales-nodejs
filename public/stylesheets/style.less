@@ -1,17 +1,81 @@
-body {
-  padding: 50px;
-  background-color: #C1D6D6;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  a {
-		text-decoration: none !important;
-  		color: black;
-	}
-	.tab{
-		background-color: #AEC1C1; 
-		padding: 15px;
-		a {
-			margin: 10px;
-		}
-	}
+@container: #31353D;
+@body: #F6FFE0;
+@button: #445878;
+@buttonHover: #107bd5;
+
+@font-face {
+  font-family:"Caviar Dreams";
+  src: url("/fonts/Sertig.otf");
 }
 
+body {
+  padding: 50px;
+  background-color: @body;
+  font: 28px "Caviar Dreams", Helvetica, Arial, sans-serif;
+	h1{
+		color: white;
+	  	margin: 0px;
+	}
+	a {
+		text-decoration: none !important;
+			color: black;
+	}
+	.clear-fix{
+  		clear: both;
+  	}
+	.tab{
+		background-color: @container; 
+		padding: 15px;
+		a {
+			padding: 15px;
+			border: 0px solid black;
+			&:hover{
+				background-color: @buttonHover;
+			}
+		}
+	}
+	.container{
+		margin-top: 50px;
+		background-color: @container;
+		padding: 10px;
+		.headerList{
+			margin: 10px; 
+			div{
+				float: left;
+				width: 180px;
+				height: 30px;
+				background-color: #1C1D21;
+				text-align: center;
+				border: 1px solid @body;
+				color: black;
+			}
+		}
+		.itemList{
+			margin: 10px;
+			div{
+				float: left;
+				width: 180px;
+				height: 30px;
+				text-align: center;
+				border: 1px solid @body;
+			}
+		}
+		.odd div{
+			background-color: #EEEFF7;
+		}
+		.even div{
+			background-color: #B4E8E8;
+		}
+	}
+	.button{
+		  padding: 5px 10px;
+		  background-color: @button;
+		  margin: 0px 10px;
+		  &:hover {
+		  background-color: @buttonHover;
+		}
+		img{
+		  	margin-bottom: -3px;
+		  }
+	}
+}

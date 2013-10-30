@@ -1,11 +1,13 @@
-<h1>Purchases</h1>
-<ul>
-	<li ng-repeat="purchase in purchases">
-		<span>{{purchase.customer.name}}</span>
-		<span>{{purchase.customer.surname}}</span>
-		<span>{{purchase.date | date:'yyyy-MM-dd HH:mm'}}</span>
-		<span>{{purchase.status}}</span>
-		<a ng-href="/purchases/delete/{{purchase._id}}">delete</a>
-	</li>
-</ul>
-<a ng-href="/purchases/create">new</a>
+<div id="purchases" class="container">
+	<h1>Purchases</h1>
+	<ul>
+		<li ng-repeat="purchase in purchases">
+			<span>{{purchase.customer.name}}</span>
+			<span>{{purchase.customer.surname}}</span>
+			<span>{{purchase.date | date:'yyyy-MM-dd HH:mm'}}</span>
+			<span>{{purchase.status}}</span>
+			<a ng-href="/purchases/delete/{{purchase._id}}">delete</a>
+		</li>
+	</ul>
+	<a ng-href="/purchases/create">new</a>
+</div>

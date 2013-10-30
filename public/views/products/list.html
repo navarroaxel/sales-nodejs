@@ -1,17 +1,19 @@
-<h1>Products</h1>
-<ul>
-	<li>
-		<b>Name</b>
-		<b>Stock</b>
-		<b>Price</b>
-		<b>Actions</b>
-	</li>
-	<li ng-repeat="product in products">
-		<span>{{product.name}}</span>
-		<span>{{product.stock}}</span>
-		<span>$ {{product.price}}</span>
-		<a ng-href="/products/edit/{{product._id}}">edit</a>
-		<a ng-href="/products/delete/{{product._id}}">delete</a>
-	</li>
-</ul>
-<a ng-href="/products/create">new</a>
+<div class="container">
+	<h1>Products</h1>
+	<div class="headerList">
+		<div>Name</div>
+		<div>Stock</div>
+		<div>Price</div>
+		<div>Actions</div>
+	</div>
+	<div class="clear-fix itemList" ng-repeat="product in products" ng-class-odd="'odd'" ng-class-even="'even'">
+		<div>{{product.name}}</div>
+		<div>{{product.stock}}</div>
+		<div>{{product.price | currency}}</div>
+		<div><a ng-href="/products/edit/{{product._id}}">Edit <img src="/images/Edit-24.png" alt="Edit"></a>&nbsp;
+			 <a ng-href="/products/delete/{{product._id}}">Delete <img src="/images/Bin-24.png" alt="Delete"></a></div>
+	</div>
+</br>
+</br>
+	<a class="button" ng-href="/products/create">New <img src="/images/Add-24.png"></a>
+</div>
