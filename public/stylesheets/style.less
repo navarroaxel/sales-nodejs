@@ -1,11 +1,13 @@
-@container: gray;
-@menu: #42484D;
-@body: #EAEAEA;
-@button: #42484D;
+/* Color */
+@headerColor: #FFFFFF;
+@bodyColor: #efeeef;
+@footerColor: #e2e2e2;
+@button: #7ac0da;
 @buttonHover: gray;
-@rowHeader: #42484D;
-@rowOdd: #969696;
-@rowEven: #CACACA;
+@rowHeader: #7ac0da;
+@rowOdd: #A6DBED;
+@rowEven: #C6DBED;
+@textColor: white;
 
 @font-face {
   font-family:"Caviar Dreams";
@@ -13,35 +15,52 @@
 }
 
 body {
-  padding: 50px;
-  background-color: @body;
-  font: 20px "Trebuchet MS", Arial, Helvetica, sans-serif;
-  color:#f7f7f7;
+	font: 20px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	background-color: @footerColor;
+	margin: 0px;
+	padding-bottom: 40px;
 	h1{
-		color: white;
-	  	margin: 0px;
+		
 	}
 	a {
 		text-decoration: none !important;
 		color: black;
 	}
+	header{
+		background-color: @headerColor;
+	}
+	section {
+		width: 100%;
+		background-color: @bodyColor;
+		padding-bottom: 20px;
+	}
+	footer{
+		background-color: @footerColor;
+		height: 100px;
+		font-size: .8em;
+		div {
+			margin: 0 auto;
+			width: 960px;
+		}
+	}
 	.clear-fix{
   		clear: both;
   	}
 	.tab{
-		background-color: @menu; 
-		padding: 15px;
+		margin: 0 auto;
+		width: 960px;
+		padding: 35 0 15 0;
 		a {
-			color: white;
 			padding: 15px;
 			&:hover{
-				background-color: @buttonHover;
+				background-color: @bodyColor;
 			}
 		}
 	}
 	.container{
-		margin-top: 50px;
-		background-color: @container;
+		margin: 0 auto;
+		width: 960px;
+		display: block;
 		padding: 10px;
 		.headerList{
 			margin: 10px; 
@@ -51,17 +70,23 @@ body {
 				height: 30px;
 				background-color: @rowHeader;
 				text-align: center;
-				color: white;
+				color: @textColor;
 			}
 		}
 		.itemList{
 			margin: 10px;
-			div{
+			div {
 				float: left;
 				width: 180px;
 				height: 30px;
 				text-align: center;
 			}
+			a {
+				img {
+					margin-bottom: -6px;
+				}
+			}
+			
 		}
 		.odd div{
 			background-color: @rowOdd;
@@ -74,12 +99,12 @@ body {
 		padding: 5px 10px;
 		background-color: @button;
 	 	margin: 0px 10px;
-	 	color:white;
+	 	color: @textColor;
 	  	&:hover {
 			background-color: @buttonHover;
 		}
 		img {
-		  	margin-bottom: -3px;
+		  	margin-bottom: -5px;
 	  	}
 	}
-}
+}	

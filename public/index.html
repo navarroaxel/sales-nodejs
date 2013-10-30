@@ -5,14 +5,23 @@
 </head>
 <body>
 	<div ng-app="sales">
+		<header>
 		<div class="tab">
 		<a ng-href="/">Home</a>
 		<a ng-href="/customers">Customers</a>
-		<a ng-href="/products">Products</a>
+		<a ng-href="/products" ng-class="productsMenu">Products</a>
 		<a ng-href="/purchases">Purchases</a>
 		</div>
+	</header>
+	<section>
 		<div ng-view></div>
+		</section>
 	</div>
+	<footer>
+		<div>
+			© 2013
+		</div>
+	</footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
 	<script src="/javascripts/app.js"></script>
 	<script src="/javascripts/services.js"></script>
