@@ -100,11 +100,20 @@ body {
 		background-color: @button;
 	 	margin: 0px 10px;
 	 	color: @textColor;
+	 	box-sizing: none !important;
+	 	border: none !important;
 	  	&:hover {
 			background-color: @buttonHover;
 		}
 		img {
 		  	margin-bottom: -5px;
 	  	}
+	}
+	.labelsContainer{
+		float:left;
+	}
+	.fieldsContainer{
+		float:left;
+		margin-left: 20px;
 	}
 }	
