@@ -1,13 +1,20 @@
-<div id="purchases" class="container">
+<div class="container">
 	<h1>Purchases</h1>
-	<ul>
-		<li ng-repeat="purchase in purchases">
-			<span>{{purchase.customer.name}}</span>
-			<span>{{purchase.customer.surname}}</span>
-			<span>{{purchase.date | date:'yyyy-MM-dd HH:mm'}}</span>
-			<span>{{purchase.status}}</span>
-			<a ng-href="/purchases/delete/{{purchase._id}}">delete</a>
-		</li>
-	</ul>
-	<a ng-href="/purchases/create">new</a>
+		<div class="headerList">
+			<div>Name</div>
+			<div>Surname</div>
+			<div>Date</div>
+			<div>Status</div>
+			<div>Action</div>
+		</div>
+		<div class="clear-fix itemList" ng-repeat="purchase in purchases" ng-class-even="'odd'" ng-class-odd="'odd'">
+			<div>{{purchase.customer.name}}</div>
+			<div>{{purchase.customer.surname}}</div>
+			<div>{{purchase.date | date:'yyyy-MM-dd HH:mm'}}</div>
+			<div>{{purchase.status}}</div>
+			<div><a ng-href="/purchases/delete/{{purchase._id}}"><img src="/images/Bin-24.png" alt="Delete" title="Delete"></a></div>
+		</div>
+		<br/>
+		<br/>
+	<a class="button" ng-href="/purchases/create">New <img src="/images/Add-24.png"></a>
 </div>

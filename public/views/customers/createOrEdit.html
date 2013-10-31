@@ -7,9 +7,17 @@
 	</div>
 	<form ng-submit="save()">
 		<input type="hidden" ng-model="customer._id"/>
-		<input type="text" ng-model="customer.name" placeholder="name"/>
-		<input type="text" ng-model="customer.surname" placeholder="surname"/>
-		<input type="submit" value="save"/>
+		<div class="labelsContainer">
+			<div>Name</div>
+			<div>Surname</div>
+		</div>
+		<div class="fieldsContainer">
+		<div><input type="text" ng-model="customer.name" placeholder="name"/></div>
+		<div><input type="text" ng-model="customer.surname" placeholder="surname"/></div>
+		</div>
+	<div class="clear-fix">
+		<input class="button" type="submit" value="save"/>
+	</div>
 	</form>
 	<a ng-href="/customers">back</a>
 </div>
