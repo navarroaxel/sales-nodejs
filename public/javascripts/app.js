@@ -2,9 +2,10 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('sales', [
+  'ui.bootstrap',
   'sales.controllers',
+  'sales.services'
   // 'sales.filters',
-  // 'sales.services',
   // 'sales.directives'
 ]).
 config(function ($routeProvider, $locationProvider) {
