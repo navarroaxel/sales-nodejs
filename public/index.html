@@ -8,9 +8,6 @@
 <body>
 	<div ng-app="sales">
 		<header>
-			<div ng-controller="AlertDemoCtrl">
-				<alert ng-repeat="alert in alerts" type="alert.type">{{alert.message}}</alert>
-			</div>
 			<div class="tab">
 				<a ng-href="/">Home</a>
 				<a ng-href="/customers">Customers</a>
@@ -19,6 +16,9 @@
 			</div>
 		</header>
 		<section>
+			<div ng-controller="AlertDemoCtrl">
+				<alert ng-repeat="alert in alerts" type="alert.type">{{alert.message}}</alert>
+			</div>
 			<div ng-view></div>
 		</section>
 	</div>
