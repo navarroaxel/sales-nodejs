@@ -6,7 +6,7 @@ angular.module('sales.services', []).
 		broadcast: function(message, type){
 			$rootScope.$broadcast('alert', {
 				message: message,
-				type: type===undefined ? 'danger' : type
+				type: type===undefined ? 'info' : type
 			});
 		}
   	};

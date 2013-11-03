@@ -8,7 +8,6 @@ angular.module('sales.controllers', []).
   controller('AlertDemoCtrl', function ($scope, $timeout) {
       $scope.alerts = [];
       $scope.$on("alert",function(event, alert){
-          console.log(alert);
           $scope.alerts.push(alert);
 
           $timeout(function(){
