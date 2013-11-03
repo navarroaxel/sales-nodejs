@@ -26,7 +26,7 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(lessMiddleware({
 	src: path.join(__dirname, 'public'),
-    compress: true
+    compress: false
   }));
 app.use(express.static(path.join(__dirname, 'public')));
 

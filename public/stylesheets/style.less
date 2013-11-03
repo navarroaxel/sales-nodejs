@@ -1,8 +1,114 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  a {
-  	color: #00B7FF;
-	}
-}
+/* Color */
+@headerColor: #FFFFFF;
+@bodyColor: #efeeef;
+@footerColor: #e2e2e2;
+@button: gray;
+@buttonHover: #7AC0DA;
+@rowHeader: #7AC0DA;
+@rowOdd: #A6DBED;
+@rowEven: #C6DBED;
+@textColor: white;
 
+body {
+	font: 20px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	background-color: @footerColor;
+	margin: 0px;
+	padding-bottom: 40px;
+	h1{
+		
+	}
+	a {
+		text-decoration: none !important;
+		color: black;
+	}
+	header{
+		background-color: @headerColor;
+	}
+	section {
+		width: 100%;
+		background-color: @bodyColor;
+		padding-bottom: 20px;
+	}
+	footer{
+		background-color: @footerColor;
+		height: 100px;
+		font-size: .8em;
+		div {
+			margin: 0 auto;
+			width: 960px;
+		}
+	}
+	.clear-fix{
+  		clear: both;
+  	}
+	.tab{
+		margin: 0 auto;
+		width: 960px;
+		padding: 35 0 15 0;
+		a {
+			padding: 15px;
+			&:hover{
+				background-color: @bodyColor;
+			}
+		}
+	}
+	.container{
+		margin: 0 auto;
+		width: 960px;
+		display: block;
+		padding: 10px;
+		.headerList{
+			margin: 10px; 
+			div{
+				float: left;
+				width: 180px;
+				height: 30px;
+				background-color: @rowHeader;
+				text-align: center;
+				color: @textColor;
+			}
+		}
+		.itemList{
+			margin: 10px;
+			div {
+				float: left;
+				width: 180px;
+				height: 30px;
+				text-align: center;
+			}
+			a {
+				img {
+					margin-bottom: -6px;
+				}
+			}
+			
+		}
+		.odd div{
+			background-color: @rowOdd;
+		}
+		.even div{
+			background-color: @rowEven;
+		}
+	}
+	.button{
+		padding: 5px 10px;
+		background-color: @button;
+	 	margin: 0px 10px;
+	 	color: @textColor;
+	 	box-sizing: none !important;
+	 	border: none !important;
+	  	&:hover {
+			background-color: @buttonHover;
+		}
+		img {
+		  	margin-bottom: -5px;
+	  	}
+	}
+	.labelsContainer{
+		float:left;
+	}
+	.fieldsContainer{
+		float:left;
+		margin-left: 20px;
+	}
+}	

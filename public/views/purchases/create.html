@@ -1,34 +1,36 @@
-<h1>Purchases</h1>
-<h2>New</h2>
-<form ng-submit="save()">
-	<input type="hidden" ng-model="purchase._id"/>
-	Customer
-	<select ng-model="customer" ng-options="c.name for c in customers">
-	</select>
-	<br/>
-	<input type="text" ng-model="purchaseQuantity">
-	<select ng-model="purchaseProduct" ng-options="p.name for p in products">
-	</select>
-	<span>{{purchaseQuantity * purchaseProduct.price}}</span>
-	<input type="button" ng-click="addProduct()" value="add product" />
-	<ul>
-		<li>
-			<b>Quantity</b>
-			<b>Product</b>
-			<b>Unit price</b>
-			<b>Subtotal</b>
-		</li>
-		<li ng-repeat="purchasedProduct in purchasedProducts">
-			<span>{{purchasedProduct.quantity}}</span>
-			<span>{{purchasedProduct.product.name}}</span>
-			<span>{{purchasedProduct.product.price}}</span>
-			<span>{{purchasedProduct.quantity * purchasedProduct.product.price}}</span>
-		</li>
-	</ul>
-	<br/>
-	<b>Total</b>
-	<span>{{total()}}</span>
-	<br/>
-	<input type="submit" value="save"/>
-</form>
-<a ng-href="/products">back</a>
+<div id="purchases" class="container">
+	<h1>Purchases</h1>
+	<h2>New</h2>
+	<form ng-submit="save()">
+		<input type="hidden" ng-model="purchase._id"/>
+		Customer
+		<select ng-model="customer" ng-options="c.name for c in customers">
+		</select>
+		<br/>
+		<input type="text" ng-model="purchaseQuantity">
+		<select ng-model="purchaseProduct" ng-options="p.name for p in products">
+		</select>
+		<span>{{purchaseQuantity * purchaseProduct.price | currency}}</span>
+		<input type="button" ng-click="addProduct()" value="add product" />
+		<ul>
+			<li>
+				<b>Quantity</b>
+				<b>Product</b>
+				<b>Unit price</b>
+				<b>Subtotal</b>
+			</li>
+			<li ng-repeat="purchasedProduct in purchasedProducts">
+				<span>{{purchasedProduct.quantity}}</span>
+				<span>{{purchasedProduct.product.name}}</span>
+				<span>{{purchasedProduct.product.price}}</span>
+				<span>{{purchasedProduct.quantity * purchasedProduct.product.price | currency}}</span>
+			</li>
+		</ul>
+		<br/>
+		<b>Total</b>
+		<span>{{total()}}</span>
+		<br/>
+		<input type="submit" value="save"/>
+	</form>
+	<a ng-href="/purchases">back</a>
+</div>

@@ -1,18 +1,20 @@
-<h1>Products</h1>
-<h2>Delete</h2>
-<div>
-	<b>Name</b>
-	<span>{{product.name}}</span>
+<div class="container">
+	<h1>Products</h1>
+	<h2>Delete</h2>
+	<div>
+		<b>Name</b>
+		<span>{{product.name}}</span>
+	</div>
+	<div>
+		<b>Stock</b>
+		<span>{{product.stock}}</span>
+	</div>
+	<div>
+		<b>Price</b>
+		<span>$ {{product.price | currency}}</span>
+	</div>
+	<form ng-submit="delete()">
+		<input type="submit" value="delete"/>
+	</form>
+	<a href="/products">back</a>
 </div>
-<div>
-	<b>Stock</b>
-	<span>{{product.stock}}</span>
-</div>
-<div>
-	<b>Price</b>
-	<span>$ {{product.price}}</span>
-</div>
-<form ng-submit="delete()">
-	<input type="submit" value="delete"/>
-</form>
-<a href="/products">back</a>

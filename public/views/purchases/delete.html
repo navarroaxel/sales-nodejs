@@ -1,3 +1,4 @@
+<div class="container">
 <h1>Purchases</h1>
 <h2>Delete</h2>
 <div>
@@ -14,8 +15,8 @@
 		<li ng-repeat="product in purchase.products">
 			<span>{{product.quantity}}</span>
 			<span>{{product.name}}</span>
-			<span>{{product.price}}</span>
-			<span>{{product.quantity * product.price}}</span>
+			<span>{{product.price | currency}}</span>
+			<span>{{product.quantity * product.price | currency}}</span>
 		</li>
 	</ul>
 </div>

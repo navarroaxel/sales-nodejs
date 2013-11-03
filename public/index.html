@@ -2,16 +2,33 @@
 <head>
 	<title>Sales app</title>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-theme.css">
 </head>
 <body>
 	<div ng-app="sales">
-		<a ng-href="/">Home</a>
-		<a ng-href="/customers">Customers</a>
-		<a ng-href="/products">Products</a>
-		<a ng-href="/purchases">Purchases</a>
-		<div ng-view></div>
+		<header>
+			<div ng-controller="AlertDemoCtrl">
+				<alert ng-repeat="alert in alerts" type="alert.type" delay="3000">{{alert.message}}</alert>
+			</div>
+			<div class="tab">
+				<a ng-href="/">Home</a>
+				<a ng-href="/customers">Customers</a>
+				<a ng-href="/products">Products</a>
+				<a ng-href="/purchases">Purchases</a>
+			</div>
+		</header>
+		<section>
+			<div ng-view></div>
+		</section>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
+	<footer>
+		<div>
+			© 2013
+		</div>
+	</footer>
+	<script src="/javascripts/angular.js"></script>
+	<script src="/javascripts/ui-bootstrap-tpls-0.6.0.js"></script>
 	<script src="/javascripts/app.js"></script>
 	<script src="/javascripts/services.js"></script>
 	<script src="/javascripts/controllers.js"></script>

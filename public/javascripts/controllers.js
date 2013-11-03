@@ -1,10 +1,20 @@
 'use strict';
 
 
-/* Controllers */
 angular.module('sales.controllers', []).
-controller('HomeCtrl', function ($scope, $http) {
+  controller('HomeCtrl', function ($scope, $http) {
     
+  }).
+  controller('AlertDemoCtrl', function ($scope, $timeout) {
+      $scope.alerts = [];
+      $scope.$on("alert",function(event, alert){
+          console.log(alert);
+          $scope.alerts.push(alert);
+
+          $timeout(function(){
+            $scope.alerts.splice(0, 1);
+          }, 5000);
+      });
   }).
   controller('CustomersIndexCtrl', function ($scope, $http) {
     $http.get('/api/customers')
@@ -14,15 +24,16 @@ controller('HomeCtrl', function ($scope, $http) {
         $scope.name = 'Error!'
       });
   }).
-  controller('CustomersNewCtrl', function ($scope, $http, $location) {
+  controller('CustomersNewCtrl', function ($scope, $http, $location, alertService) {
     $scope.save = function() {
       $http.post('/api/customers/', $scope.customer)
         .success(function() {
           $location.path("/customers");
+          alertService.broadcast("customer saved.");
         });
     };
   }).
-  controller('CustomersEditCtrl', function ($scope, $http, $location, $routeParams) {
+  controller('CustomersEditCtrl', function ($scope, $http, $location, $routeParams, alertService) {
     $http.get('/api/customers/'+$routeParams.id)
       .success(function (data, status, headers, config) {
         $scope.customer = data;
@@ -33,6 +44,7 @@ controller('HomeCtrl', function ($scope, $http) {
       $http.put("/api/customers/"+$routeParams.id, $scope.customer)
         .success(function() {
           $location.path("/customers");
+          alertService.broadcast("customer edited.");
         });
     };
   }).

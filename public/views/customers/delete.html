@@ -1,18 +1,20 @@
-<h1>Customers</h1>
-<h2>Delete</h2>
-<div>
-	<b>ID</b>
-	<span>{{customer._id}}</span>
+<div class="container">
+	<h1>Customers</h1>
+	<h2>Delete</h2>
+	<div>
+		<b>ID</b>
+		<span>{{customer._id}}</span>
+	</div>
+	<div>
+		<b>Name</b>
+		<span>{{customer.name}}</span>
+	</div>
+	<div>
+		<b>Surname</b>
+		<span>{{customer.surname}}</span>
+	</div>
+	<form ng-submit="delete()">
+		<input type="submit" value="delete"/>
+	</form>
+	<a href="/customers">back</a>
 </div>
-<div>
-	<b>Name</b>
-	<span>{{customer.name}}</span>
-</div>
-<div>
-	<b>Surname</b>
-	<span>{{customer.surname}}</span>
-</div>
-<form ng-submit="delete()">
-	<input type="submit" value="delete"/>
-</form>
-<a href="/customers">back</a>
