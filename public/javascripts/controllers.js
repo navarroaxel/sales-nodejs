@@ -115,20 +115,54 @@ angular.module('sales.controllers', []).
         $scope.name = 'Error!'
       });
   }).
-  controller('PurchasesNewCtrl', function ($scope, $http, $location) {
+  controller('PurchasesNewCtrl', function ($scope, $http, $location, alertService) {
     $scope.purchasedProducts = [];
     $http.get('/api/purchases/create')
       .success(function (data, status, headers, config) {
+        if (data.customers.length == 0){
+          alertService.broadcast("You should first create a customer to load a purchase.");
+          $location.path('/customers/create');
+          return;
+        }
+        if (data.products.length == 0){
+          alertService.broadcast("You should first create a product to load a purchase.");
+          $location.path('/products/create');
+          return;
+        }
         $scope.customers = data.customers;
         $scope.products = data.products;
+        $scope.customer = data.customers[0];
+        $scope.purchaseProduct = data.products[0];
       }).error(function (data, status, headers, config) {
         $scope.name = 'Error!'
       });
     $scope.addProduct = function() {
+      if ($scope.purchaseQuantity == undefined ||$scope.purchaseQuantity.$valid == false || $scope.purchaseProduct.$valid == false){
+        alertService.broadcast('you should enter a valid quantity and a product', "danger");
+        return;
+      }
+
+      $scope.addingProduct = true;
+
+      for (var i = $scope.purchasedProducts.length - 1; i >= 0; i--) {
+        if ($scope.purchasedProducts[i].product._id == $scope.purchaseProduct._id){
+          $scope.purchasedProducts[i].quantity += $scope.purchaseQuantity;
+          return;
+        }
+      }
+
       $scope.purchasedProducts.push({
         quantity: $scope.purchaseQuantity,
         product: $scope.purchaseProduct,
       });
+    };
+    $scope.removeProduct = function(id){
+      for (var i = $scope.purchasedProducts.length - 1; i >= 0; i--) {
+        if ($scope.purchasedProducts[i].product._id == $scope.purchaseProduct._id){
+          $scope.purchasedProducts.splice(i,1);
+          return;
+        }
+      };
     };
     $scope.total = function() {
       var total = 0;
@@ -138,7 +172,15 @@ angular.module('sales.controllers', []).
       return total;
     }
     $scope.save = function() {
-      $http.post('/api/purchases/', $scope.purchase)
+      var products = [];
+      // angular.forEach($scope.purchaseProducts, function(value, key) {
+      //   products.push({
+      //     product_id: value.product._id,
+      //   });
+      // });
+
+
+      $http.post('/api/purchases/', {customer_id: $scope.customer._id})
         .success(function() {
           $location.path("/purchases");
         });

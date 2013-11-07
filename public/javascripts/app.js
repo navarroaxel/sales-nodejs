@@ -4,9 +4,9 @@
 angular.module('sales', [
   'ui.bootstrap',
   'sales.controllers',
-  'sales.services'
-  // 'sales.filters',
-  // 'sales.directives'
+  'sales.services',
+  'sales.filters',
+  'sales.directives'
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
