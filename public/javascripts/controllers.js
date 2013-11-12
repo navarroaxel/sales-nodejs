@@ -1,9 +1,13 @@
 'use strict';
 
-
 angular.module('sales.controllers', []).
   controller('HomeCtrl', function ($scope, $http) {
-    
+    $http.get('/api/purchases/dashboard')
+      .success(function(data, status, headers, config) {
+
+      }).error(function (data, status, headers, config) {
+        alertService.broadcast(data);
+      });
   }).
   controller('AlertDemoCtrl', function ($scope, $timeout) {
       $scope.alerts = [];
@@ -11,7 +15,7 @@ angular.module('sales.controllers', []).
           $scope.alerts.push(alert);
 
           $timeout(function(){
-            $scope.alerts.splice(0, 1);
+            $scope.alerts.shift();
           }, 5000);
       });
   }).
@@ -20,15 +24,20 @@ angular.module('sales.controllers', []).
       .success(function (data, status, headers, config) {
         $scope.customers = data;
       }).error(function (data, status, headers, config) {
-        $scope.name = 'Error!'
+        alertService.broadcast(data);
       });
   }).
   controller('CustomersNewCtrl', function ($scope, $http, $location, alertService) {
     $scope.save = function() {
+       if ($scope.customerEditor.$invalid){
+        alertService.broadcast("Please, review the errors and try again.");
+        return;
+      }
+
       $http.post('/api/customers/', $scope.customer)
         .success(function() {
           $location.path("/customers");
-          alertService.broadcast("customer saved.");
+          alertService.broadcast("Customer saved successfully.");
         });
     };
   }).
@@ -37,17 +46,23 @@ angular.module('sales.controllers', []).
       .success(function (data, status, headers, config) {
         $scope.customer = data;
       }).error(function (data, status, headers, config) {
-        $scope.name = 'Error!'
+        alertService.broadcast(data);
+        $location.path("/customers");
       });
     $scope.save = function(){
+      if ($scope.customerEditor.$invalid){
+        alertService.broadcast("Please, review the errors and try again.");
+        return;
+      }
+    
       $http.put("/api/customers/"+$routeParams.id, $scope.customer)
         .success(function() {
+          alertService.broadcast("Customer updated successfully.");
           $location.path("/customers");
-          alertService.broadcast("customer edited.");
         });
     };
   }).
-  controller('CustomersDeleteCtrl', function ($scope, $http, $location, $routeParams) {
+  controller('CustomersDeleteCtrl', function ($scope, $http, $location, $routeParams, alertService) {
    $http.get('/api/customers/'+$routeParams.id)
       .success(function (data, status, headers, config) {
         $scope.customer = data;
@@ -58,7 +73,7 @@ angular.module('sales.controllers', []).
       $scope.delete = function(){
         $http.delete("/api/customers/"+$routeParams.id, $scope.customer)
           .success(function() {
-            console.log($location);
+            alertService.broadcast("Customer deleted successfully.");
             $location.path("/customers");
           });
       };
@@ -73,8 +88,14 @@ angular.module('sales.controllers', []).
   }).
   controller('ProductsNewCtrl', function ($scope, $http, $location) {
       $scope.save = function() {
+        if ($scope.productEditor.$invalid){
+          alertService.broadcast("Please, review the errors and try again.");
+          return;
+        }
+
         $http.post('/api/products/', $scope.product)
         .success(function() {
+            alertService.broadcast("Product saved successfully.");
             $location.path("/products");
           });
       };
@@ -87,8 +108,14 @@ angular.module('sales.controllers', []).
         $scope.name = 'Error!'
       });
       $scope.save = function(){
+        if ($scope.productEditor.$invalid){
+          alertService.broadcast("Please, review the errors and try again.");
+          return;
+        }
+
         $http.put("/api/products/"+$routeParams.id, $scope.product)
           .success(function() {
+            alertService.broadcast("Product updated successfully.");
             $location.path("/products");
           });
       };
@@ -103,6 +130,7 @@ angular.module('sales.controllers', []).
       $scope.delete = function(){
         $http.delete("/api/products/"+$routeParams.id, $scope.product)
           .success(function() {
+            alertService.broadcast("Product deleted successfully.");
             $location.path("/products");
           });
       };
@@ -173,28 +201,28 @@ angular.module('sales.controllers', []).
     }
     $scope.save = function() {
       var products = [];
-      // angular.forEach($scope.purchaseProducts, function(value, key) {
-      //   products.push({
-      //     product_id: value.product._id,
-      //   });
-      // });
+      angular.forEach($scope.purchasedProducts, function(value, key) {
+        products.push({
+          product_id: value.product._id,
+          quantity: value.quantity,
+        });
+      });
 
-
-      $http.post('/api/purchases/', {customer_id: $scope.customer._id})
+      $http.post('/api/purchases/', {customer_id: $scope.customer._id, products: products})
         .success(function() {
           $location.path("/purchases");
         });
     };
   }).
   controller('PurchasesDeleteCtrl', function ($scope, $http, $location, $routeParams) {
-   $http.get('/api/purchases/'+$routeParams.id)
+   $http.get('/api/purchases/' + $routeParams.id)
       .success(function (data, status, headers, config) {
         $scope.purchase = data;
       }).error(function (data, status, headers, config) {
         $scope.name = 'Error!'
       });
       $scope.delete = function() {
-        $http.delete("/api/purchases/"+$routeParams.id, $scope.product)
+        $http.delete("/api/purchases/" + $routeParams.id, $scope.product)
           .success(function() {
             console.log($location);
             $location.path("/purchases");

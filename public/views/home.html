@@ -1,4 +1,19 @@
 <div class="container">
-	<h1>Home</h1>
 	<h2>Dashboard</h2>
+	<div class="headerList">
+			<div>Name</div>
+			<div>Surname</div>
+			<div>Date</div>
+			<div>Status</div>
+			<div>Action</div>
+		</div>
+		<div class="clear-fix itemList" ng-repeat="purchase in purchases" ng-class-even="'odd'" ng-class-odd="'odd'">
+			<div>{{purchase.customer.name}}</div>
+			<div>{{purchase.customer.surname}}</div>
+			<div>{{purchase.date | date:'yyyy-MM-dd HH:mm'}}</div>
+			<div>{{purchase.status}}</div>
+			<div><a ng-href="/purchases/delete/{{purchase._id}}"><img src="/images/Bin-24.png" alt="Delete" title="Delete"></a></div>
+		</div>
+		<br/>
+		<br/>
 </div>

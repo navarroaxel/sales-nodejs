@@ -4,12 +4,28 @@
 	    <h2 ng-switch-when="true">Edit</h2>
 	    <h2 ng-switch-when="false">New</h2>
 	</div>
-	<form ng-submit="save()">
-		<input type="hidden" ng-model="product._id"/>
-		<input type="text" ng-model="product.name" placeholder="name"/>
-		<input type="text" ng-model="product.stock" placeholder="stock"/>
-		<input type="text" ng-model="product.price" placeholder="price"/>
-		<input type="submit" value="save"/>
+	<form ng-submit="save()" name="productEditor">
+		<div class="labelsContainer">
+			<div>Name</div>
+			<div>Stock</div>
+			<div>Price</div>
+		</div>
+		<div class="fieldsContainer">
+			<div>
+				<input type="text" name="name" ng-model="product.name" placeholder="name" required ng-minlength="2" ng-maxlenght="40"/>
+				<span class="error" ng-show="productEditor.name.$error.minlength">Too short!</span>
+	    		<span class="error" ng-show="productEditor.name.$error.maxlength">Too long!</span>
+			</div>
+			<div>
+				<input type="number" name="stock" ng-model="product.stock" placeholder="stock" required/>
+			</div>
+			<div>
+				<input type="number" name="price" ng-model="product.price" placeholder="price" required/>
+			</div>
+		</div>
+		<div class="clear-fix">
+			<input type="submit" class="button" value="save"/>
+		</div>
 	</form>
 	<a ng-href="/products">back</a>
 </div>

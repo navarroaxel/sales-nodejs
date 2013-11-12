@@ -33,17 +33,21 @@ exports.createInitLoad = function(req, res, next){
 exports.create = function(req, res, next){
   Purchase.create({
 	  	status: PurchaseStatus.IN_PROGRESS,
-	  	name: req.body.name,
-	  	surname: req.body.surname
+	  	customer_id: req.body.customer_id,
+	  	products: req.body.products
   	}, function(err, purchase) {
   		if (err) return next(err);
-		res.end();
+  		res.end();
   	});
 };
 
 exports.delete = function(req, res, next){
 	Purchase.findById(req.params.id, function(err, purchase) {
 		if (err) return next(err);
+		if (purchase == null) {
+			res.status(404).send('Purchase not found!');
+			return;
+		}
 		purchase.deleted = true;
 		purchase.save();
 		res.end();

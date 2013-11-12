@@ -10,6 +10,10 @@ exports.list = function(req, res, next) {
 exports.get = function(req, res, next) {
 	Product.findById(req.params.id, function(err, product) {
 		if (err) return next(err);
+		if (product == null) {
+			res.status(404).send('Product not found!');
+			return;
+		}
 		res.json(product);
 	});
 }
@@ -28,6 +32,10 @@ exports.create = function(req, res, next) {
 exports.update = function(req, res, next) {
 	Product.findById(req.params.id, function(err, product) {
 		if (err) return next(err);
+		if (product == null) {
+			res.status(404).send('Product not found!');
+			return;
+		}
 		product.name = req.body.name;
 		product.stock = req.body.stock;
 		product.price = req.body.price;
@@ -39,6 +47,10 @@ exports.update = function(req, res, next) {
 exports.delete = function(req, res, next) {
 	Product.findById(req.params.id, function(err, product) {
 		if (err) return next(err);
+		if (product == null) {
+			res.status(404).send('Product not found!');
+			return;
+		}
 		product.deleted = true;
 		product.save();
 		res.end();
