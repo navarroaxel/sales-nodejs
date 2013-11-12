@@ -1,0 +1,10 @@
+<div class="label">
+    <label class="control-label" for="{{attrs.name}}">{{attrs.label}}</label>
+</div>
+<div class="field">
+	<input type="{{type}}" ng-model="{{attrs.name}}" name="{{attrs.name}}" ng-required="{{attrs.required}}" ng-minlength="{{attrs.minlength}}" ng-maxlength="attrs.maxlength">
+	<span class="error" ng-show="myForm.lastName.$error.minlength">
+          Too short!</span>
+    <span class="error" ng-show="myForm.lastName.$error.maxlength">
+      	  Too long!</span><br>
+</div>
