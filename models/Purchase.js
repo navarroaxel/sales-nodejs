@@ -5,9 +5,9 @@ var schema = new mongoose.Schema({
     date: { type: Date, default: Date.now },
     status: Number,
     deleted: { type: Boolean, default: false },
-    customer_id: mongoose.Schema.ObjectId,
+    _customer: [{ type: mongoose.Schema.ObjectId, ref: 'Customer' }],
     products: {
-    	product_id: mongoose.Schema.ObjectId,
+    	_product: [{ type: mongoose.Schema.ObjectId, ref:'Product' }],
     	quantity: Number,
     	price: Number
     }

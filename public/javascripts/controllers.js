@@ -78,15 +78,15 @@ angular.module('sales.controllers', []).
           });
       };
   }).
-  controller('ProductsIndexCtrl', function ($scope, $http) {
+  controller('ProductsIndexCtrl', function ($scope, $http, alertService) {
     $http.get('/api/products')
       .success(function (data, status, headers, config) {
         $scope.products = data;
       }).error(function (data, status, headers, config) {
-        $scope.name = 'Error!'
+        alertService.broadcast(data);
       });
   }).
-  controller('ProductsNewCtrl', function ($scope, $http, $location) {
+  controller('ProductsNewCtrl', function ($scope, $http, $location, alertService) {
       $scope.save = function() {
         if ($scope.productEditor.$invalid){
           alertService.broadcast("Please, review the errors and try again.");
@@ -100,7 +100,7 @@ angular.module('sales.controllers', []).
           });
       };
   }).
-  controller('ProductsEditCtrl', function ($scope, $http, $location, $routeParams) {
+  controller('ProductsEditCtrl', function ($scope, $http, $location, $routeParams, alertService) {
    $http.get('/api/products/'+$routeParams.id)
       .success(function (data, status, headers, config) {
         $scope.product = data;
@@ -120,7 +120,7 @@ angular.module('sales.controllers', []).
           });
       };
   }).
-  controller('ProductsDeleteCtrl', function ($scope, $http, $location, $routeParams) {
+  controller('ProductsDeleteCtrl', function ($scope, $http, $location, $routeParams, alertService) {
    $http.get('/api/products/'+$routeParams.id)
       .success(function (data, status, headers, config) {
         $scope.product = data;
@@ -208,7 +208,7 @@ angular.module('sales.controllers', []).
         });
       });
 
-      $http.post('/api/purchases/', {customer_id: $scope.customer._id, products: products})
+      $http.post('/api/purchases/', {_customer: $scope.customer._id, products: products})
         .success(function() {
           $location.path("/purchases");
         });

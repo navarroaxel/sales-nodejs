@@ -1,10 +1,12 @@
 var Customer = require('../models/Customer.js');
 
 exports.list = function(req, res, next) {
-  	Customer.find({deleted: false}, function(err, customers) {
-		if (err) return next(err);
-		res.json(customers);
-	});
+  	Customer.find({deleted: false}).
+  		populate('customer_id').
+  		exec(function(err, customers) {
+			if (err) return next(err);
+			res.json(customers);
+		});
 };
 
 exports.get = function(req, res, next) {

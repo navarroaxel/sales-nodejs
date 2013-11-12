@@ -33,7 +33,7 @@ exports.createInitLoad = function(req, res, next){
 exports.create = function(req, res, next){
   Purchase.create({
 	  	status: PurchaseStatus.IN_PROGRESS,
-	  	customer_id: req.body.customer_id,
+	  	_customer: req.body._customer,
 	  	products: req.body.products
   	}, function(err, purchase) {
   		if (err) return next(err);
