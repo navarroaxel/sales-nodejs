@@ -4,10 +4,12 @@ var Purchase = require('../models/Purchase.js');
 var PurchaseStatus = require('../models/enums.js').PurchaseStatus;
 
 exports.list = function(req, res, next){
-	Purchase.find({ deleted: false }, function(err, purchases) {
-		if (err) return next(err);
-		res.json(purchases);
-	});
+	Purchase.find({ deleted: false }).
+		populate('_customer').
+		exec(function(err, purchases) {
+			if (err) return next(err);
+			res.json(purchases);
+		});
 }
 
 exports.get = function(req, res, next){
@@ -31,14 +33,21 @@ exports.createInitLoad = function(req, res, next){
 };
 
 exports.create = function(req, res, next){
-  Purchase.create({
-	  	status: PurchaseStatus.IN_PROGRESS,
-	  	_customer: req.body._customer,
-	  	products: req.body.products
-  	}, function(err, purchase) {
-  		if (err) return next(err);
-  		res.end();
-  	});
+	Customer.findById(req.body._customer, function(err, customer){
+		if (err) return next(err);
+		if (customer == null){
+			res.status(400).send('The customer does not exist.');
+		}
+		Purchase.create({
+		  	status: PurchaseStatus.IN_PROGRESS,
+		  	_customer: customer._id,
+		  	products: req.body.products
+	  	}, function(err, purchase) {
+	  		if (err) return next(err);
+	  		res.end();
+	  	});
+	});
+  
 };
 
 exports.delete = function(req, res, next){
