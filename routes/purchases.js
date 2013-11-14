@@ -1,7 +1,7 @@
 var Customer = require('../models/Customer.js');
 var Product = require('../models/Product.js');
 var Purchase = require('../models/Purchase.js');
-var PurchaseStatus = require('../models/enums.js').PurchaseStatus;
+var purchaseStatus = require('../models/enums.js').purchaseStatus;
 
 exports.list = function(req, res, next){
 	Purchase.find({ deleted: false }).
@@ -39,7 +39,7 @@ exports.create = function(req, res, next){
 			res.status(400).send('The customer does not exist.');
 		}
 		Purchase.create({
-		  	status: PurchaseStatus.IN_PROGRESS,
+		  	status: purchaseStatus[0],
 		  	_customer: customer._id,
 		  	products: req.body.products
 	  	}, function(err, purchase) {
@@ -47,7 +47,6 @@ exports.create = function(req, res, next){
 	  		res.end();
 	  	});
 	});
-  
 };
 
 exports.delete = function(req, res, next){

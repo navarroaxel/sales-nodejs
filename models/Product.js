@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-    name: String,
-    stock: Number,
-    price: Number,
-    deleted: { type: Boolean, default: false }
+    name: { type: String, required: true },
+    stock: { type: Number, required: true },
+    price: { type: Number, required: true },
+    deleted: { type: Boolean, default: false, required: true }
 });
 
 module.exports = mongoose.model('Product', schema);
