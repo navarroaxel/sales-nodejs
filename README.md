@@ -3,7 +3,7 @@ sales-nodejs
 
 A sales app made in node.js + AngularJS + MongoDB
 
-This is a simple web application that I have desired when I started with Node.js. With this you can see how to use:
+This is a simple web application that I would love to have available when I started with Node.js. With this you can see how to use:
 * How to use Express framework without rendering (The HTML templates are rendered by AngularJS).
 * How to organize you model and routes (API Controllers).
 * AngularJS with Node.js as an API Server.
