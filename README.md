@@ -12,7 +12,7 @@ This is a simple web application that I have desired when I started with Node.js
 
 # Installation
 
-After the git clone you should install all the dependencies using the npm (Node Packaged Modules, this guy will download and install software for you).
+After the git clone you should install all the dependencies using the npm command (Node Packaged Modules, this guy will download and install software for you):
 
     git clone https://github.com/navarroaxel/sales-nodejs.git
     cd sales-nodejs
