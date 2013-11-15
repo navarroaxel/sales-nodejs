@@ -26,12 +26,14 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(lessMiddleware({
 	src: path.join(__dirname, 'public'),
+	// set true to minify the css.
     compress: false
   }));
 
+// public is the folder for static content (images, css, js, etc).
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 
+// any GET that is not handle by static downloads the index page.
 app.use(function(req, res, next){
 	if (req.method != 'GET') {
 		next();
@@ -44,7 +46,8 @@ app.use(function(req, res, next){
 
 // development only
 app.configure('development', function() {
-  app.use(express.errorHandler());
+	// returns the exception detail to the client.
+	app.use(express.errorHandler());
 });
 
 // routes

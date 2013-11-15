@@ -6,7 +6,8 @@ angular.module('sales.filters', []).
       return input.replace(RegExp(searchRegex), replaceRegex);
     }
   }).
-  filter('purchaseStatus', function(){
+  filter('purchaseStatus', function() {
+  	// makes the enum value more readable.
   	return function(input){
   		switch(input){
   			case 'in_progress':

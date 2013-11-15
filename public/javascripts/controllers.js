@@ -11,9 +11,12 @@ angular.module('sales.controllers', []).
   }).
   controller('AlertDemoCtrl', function ($scope, $timeout) {
       $scope.alerts = [];
-      $scope.$on("alert",function(event, alert){
+
+      // when receives an alert message displays the object on the notification section.
+      $scope.$on("alert", function(event, alert) {
           $scope.alerts.push(alert);
 
+          // after 5 seconds the message disappears.
           $timeout(function(){
             $scope.alerts.shift();
           }, 5000);
@@ -94,7 +97,7 @@ angular.module('sales.controllers', []).
         }
 
         $http.post('/api/products/', $scope.product)
-        .success(function() {
+          .success(function() {
             alertService.broadcast("Product saved successfully.");
             $location.path("/products");
           });

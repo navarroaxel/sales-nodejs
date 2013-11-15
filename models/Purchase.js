@@ -13,4 +13,6 @@ var schema = new mongoose.Schema({
     }
 });
 
+// For more info about the Population (ref) see: http://mongoosejs.com/docs/populate.html
+
 module.exports = mongoose.model('Purchase', schema);
