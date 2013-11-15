@@ -28,8 +28,10 @@ app.use(lessMiddleware({
 	src: path.join(__dirname, 'public'),
     compress: false
   }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 
 app.use(function(req, res, next){
 	if (req.method != 'GET') {
 		next();
@@ -45,6 +47,7 @@ app.configure('development', function() {
   app.use(express.errorHandler());
 });
 
+// routes
 app.get('/api/customers', customers.list);
 app.get('/api/customers/:id', customers.get);
 app.post('/api/customers/', customers.create);
@@ -63,6 +66,7 @@ app.get('/api/purchases/:id', purchases.get);
 app.post('/api/purchases/', purchases.create);
 app.delete('/api/purchases/:id', purchases.delete);
 
+// start server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
