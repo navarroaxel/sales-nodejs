@@ -23,3 +23,12 @@ After the git clone you should install all the dependencies using the npm comman
 When you are ready to run the application you should use:
 
     node app.js
+
+# MongoDB
+
+If this is your first time with Mongo you can check here http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/ to know how to run Mongo on Windows.
+
+# Coming soon
+
+* Better comments to understand the code
+* Unit tests!
