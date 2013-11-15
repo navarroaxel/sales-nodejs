@@ -18,6 +18,18 @@ After the git clone you should install all the dependencies using the npm comman
     cd sales-nodejs
     npm install
 
+# IDE
+
+I use Sublime Text because is a light text editor and there are package for every language that you want to use.
+
+You can download from here: http://www.sublimetext.com/2.
+
+I sure you want some sugar with your new editor! you can add the packages for all the modules we use here:
+* Nodejs Sublime Text 2 Package https://github.com/tanepiper/SublimeText-Nodejs
+* AngularJS Sublime Text Package https://github.com/angular-ui/AngularJS-sublime-package
+* LESS syntax for Sublime Text https://github.com/danro/LESS-sublime
+
+
 # Running
 
 When you are ready to run the application you should use:
