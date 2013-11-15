@@ -9,7 +9,7 @@
 		<div class="clear-fix itemList" ng-repeat="purchase in purchases" ng-class-even="'odd'" ng-class-odd="'odd'">
 			<div>{{purchase._customer.name}}&nbsp;{{purchase._customer.surname}}</div>
 			<div>{{purchase.date | date:'yyyy-MM-dd HH:mm'}}</div>
-			<div>{{purchase.status}}</div>
+			<div>{{purchase.status | purchaseStatus}}</div>
 			<div><a ng-href="/purchases/delete/{{purchase._id}}"><img src="/images/Bin-24.png" alt="Delete" title="Delete"></a></div>
 		</div>
 		<br/>
