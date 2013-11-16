@@ -4,7 +4,7 @@ var Purchase = require('../models/Purchase.js');
 var purchaseStatus = require('../models/enums.js').purchaseStatus;
 
 exports.list = function(req, res, next){
-	Purchase.find({ deleted: false }).
+	Purchase.find({ deleted: false, status: { $ne: 'closed' } }).
 		populate('_customer').
 		exec(function(err, purchases) {
 			if (err) return next(err);
@@ -61,3 +61,11 @@ exports.delete = function(req, res, next){
 		res.end();
 	});
 };
+
+exports.dashboard = function(req, res, next) {
+	Purchase.find({ status: 'in_progress' }).
+		limit(5).exec(function(err, purchases)) {
+			if (err) return next(err);
+			res.json(purchases);
+		}
+}

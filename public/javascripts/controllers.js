@@ -4,7 +4,7 @@ angular.module('sales.controllers', []).
   controller('HomeCtrl', function ($scope, $http) {
     $http.get('/api/purchases/dashboard')
       .success(function(data, status, headers, config) {
-
+        $scope.purchases = data;
       }).error(function (data, status, headers, config) {
         alertService.broadcast(data);
       });
