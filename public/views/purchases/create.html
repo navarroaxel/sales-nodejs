@@ -4,7 +4,7 @@
 	<form ng-submit="save()">
 		<input type="hidden" ng-model="purchase._id"/>
 		Customer
-		<select ng-model="customer" ng-options="c.name for c in customers">
+		<select ng-model="customer" ng-options="c | fullName for c in customers">
 		</select>
 		<br/>
 		<input type="number" ng-model="purchaseQuantity" focus="addingProduct" required>

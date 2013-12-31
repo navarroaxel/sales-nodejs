@@ -22,4 +22,9 @@ angular.module('sales.filters', []).
 				return input;
   		}
   	}
-  });
+  }).
+  filter('fullName', function() {
+    return function(input){
+      return input ? input.name + ' ' + input.surname : '';
+    }
+  });;

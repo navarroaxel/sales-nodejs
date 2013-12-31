@@ -74,7 +74,7 @@ angular.module('sales.controllers', []).
       });
       console.log($location);
       $scope.delete = function(){
-        $http.delete("/api/customers/"+$routeParams.id, $scope.customer)
+        $http.delete("/api/customers/" + $routeParams.id, $scope.customer)
           .success(function() {
             alertService.broadcast("Customer deleted successfully.");
             $location.path("/customers");
@@ -139,12 +139,34 @@ angular.module('sales.controllers', []).
       };
   }).
   controller('PurchasesIndexCtrl', function ($scope, $http) {
-    $http.get('/api/purchases')
+    $http.get('/api/purchases/list')
       .success(function (data, status, headers, config) {
-        $scope.purchases = data;
+        $scope.purchases = data.purchases;
+        $scope.purchaseStatus = data.purchaseStatus;
+        $scope.status = data.purchaseStatus[0];
       }).error(function (data, status, headers, config) {
         $scope.name = 'Error!'
-      });
+      });        
+
+    $scope.refresh = function() {
+      var config = $scope.status == "Unclosed" ? { } : { params: { purchaseStatus: $scope.status } };
+      $http.get('/api/purchases', config)
+        .success(function (data, status, headers, config) {
+          $scope.purchases = data;
+        }).error(function (data, status, headers, config) {
+          $scope.name = 'Error!'
+        });        
+    };
+
+    $scope.nextStatus = function(purchase) {
+      var config = $scope.status == "Unclosed" ? { } : { params: { purchaseStatus: $scope.status } };
+      $http.get('/api/purchases/nextstatus/' + purchase._id, config)
+        .success(function (data, status, headers, config) {
+          $scope.purchases = data;
+        }).error(function (data, status, headers, config) {
+          $scope.name = 'Error!'
+        });
+    }
   }).
   controller('PurchasesNewCtrl', function ($scope, $http, $location, alertService) {
     $scope.purchasedProducts = [];

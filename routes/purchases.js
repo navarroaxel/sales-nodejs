@@ -3,10 +3,27 @@ var Product = require('../models/Product.js');
 var Purchase = require('../models/Purchase.js');
 var purchaseStatus = require('../models/enums.js').purchaseStatus;
 
+exports.listInitLoad = function(req, res, next){
+	Purchase.find({ deleted: false, status: { $ne: 'closed' } })
+		.populate('_customer')
+		.exec(function(err, purchases) {
+			if (err) return next(err);
+			Customer.find({}, function(err, customers) {
+				if (err) return next(err);
+				res.json({
+					purchases: purchases,
+					purchaseStatus: ['Unclosed'].concat(purchaseStatus),
+					customers: customers
+				});
+			});
+		});
+}
+
 exports.list = function(req, res, next){
-	Purchase.find({ deleted: false, status: { $ne: 'closed' } }).
-		populate('_customer').
-		exec(function(err, purchases) {
+	var status = req.query.purchaseStatus ? req.query.purchaseStatus : { $ne: 'closed' };
+	Purchase.find({ deleted: false, status: status })
+		.populate('_customer')
+		.exec(function(err, purchases) {
 			if (err) return next(err);
 			res.json(purchases);
 		});
@@ -63,9 +80,27 @@ exports.delete = function(req, res, next){
 };
 
 exports.dashboard = function(req, res, next) {
-	Purchase.find({ status: 'in_progress' }).
-		limit(5).exec(function(err, purchases)) {
+	Purchase.find({ status: 'in_progress' })
+		.limit(5)
+		.exec(function(err, purchases) {
 			if (err) return next(err);
 			res.json(purchases);
+		});
+}
+
+exports.nextstatus = function(req, res, next){
+	Purchase.findById(req.params.id, function(err, purchase) {
+		if (err) return next(err);
+		if (purchase.status == purchaseStatus[purchaseStatus.length - 1]) {
+			return next('Cannot change the status of a closed purchase.');
 		}
+		var index = purchaseStatus.indexOf(purchase.status);
+		if (index == -1) return next('Cannot change the status of the purchase, the new state is invalid.');
+		purchase.status = purchaseStatus[index + 1];
+
+		purchase.save(function(err) {
+			if (err) return next(err);
+			return next();
+		});
+	});
 }
