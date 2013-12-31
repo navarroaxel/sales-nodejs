@@ -1,5 +1,7 @@
 var purchaseStatus = require('./enums.js').purchaseStatus;
 var mongoose = require('mongoose');
+// https://github.com/drudge/mongoose-timestamp
+var timestamps = require('mongoose-timestamp');
 
 var schema = new mongoose.Schema({
     date: { type: Date, default: Date.now, required: true },
@@ -15,4 +17,5 @@ var schema = new mongoose.Schema({
 
 // For more info about the Population (ref) see: http://mongoosejs.com/docs/populate.html
 
+schema.plugin(timestamps);
 module.exports = mongoose.model('Purchase', schema);

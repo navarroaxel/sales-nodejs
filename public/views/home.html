@@ -1,17 +1,30 @@
 <div class="container">
-	<h2>Dashboard</h2>
-	<div class="headerList">
-			<div>Customer</div>
-			<div>Date</div>
-			<div>Status</div>
-			<div>Action</div>
-		</div>
-		<div class="clear-fix itemList" ng-repeat="purchase in purchases" ng-class-even="'odd'" ng-class-odd="'odd'">
-			<div>{{purchase.customer.name}}&nbsp;{{purchase.customer.surname}}</div>
-			<div>{{purchase.date | date:'yyyy-MM-dd HH:mm'}}</div>
-			<div>{{purchase.status | purchaseStatus}}</div>
-			<div><a ng-href="/purchases/delete/{{purchase._id}}"><img src="/images/Bin-24.png" alt="Delete" title="Delete"></a></div>
-		</div>
-		<br/>
-		<br/>
+    <h2>Dashboard</h2>
+    <div class="headerList">
+        <div>Status</div>
+        <div>Count</div>
+        <div>Oldest</div>
+        <div>Newest</div>
+    </div>
+    <div class="clear-fix itemList" ng-repeat="counter in counters" ng-class-even="'even'" ng-class-odd="'odd'">
+        <div>{{ counter._id | purchaseStatus }}</div>
+        <div>{{ counter.count }}</div>
+        <div>{{ counter.oldest | date: 'yyyy-MM-dd HH:mm' }}</div>
+        <div>{{ counter.newest | date: 'yyyy-MM-dd HH:mm' }}</div>
+    </div>
+    <br />
+    <br />
+    <h3>Today Summary</h3>
+    <div class="headerList">
+        <div>Status</div>
+        <div>Count</div>
+        <div>Modified</div>
+    </div>
+    <div class="clear-fix itemList" ng-repeat="todayCounter in todayCounters" ng-class-even="'even'" ng-class-odd="'odd'">
+        <div>{{ todayCounter._id | purchaseStatus }}</div>
+        <div>{{ todayCounter.count }}</div>
+        <div>{{ todayCounter.modified | date: 'yyyy-MM-dd HH:mm' }}</div>
+    </div>
+    <br />
+    <br />
 </div>

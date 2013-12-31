@@ -4,7 +4,8 @@ angular.module('sales.controllers', []).
   controller('HomeCtrl', function ($scope, $http) {
     $http.get('/api/purchases/dashboard')
       .success(function(data, status, headers, config) {
-        $scope.purchases = data;
+        $scope.counters = data.counters;
+        $scope.todayCounters = data.todayCounters;
       }).error(function (data, status, headers, config) {
         alertService.broadcast(data);
       });
@@ -70,7 +71,7 @@ angular.module('sales.controllers', []).
       .success(function (data, status, headers, config) {
         $scope.customer = data;
       }).error(function (data, status, headers, config) {
-        $scope.name = 'Error!'
+        alertService.broadcast(data);
       });
       console.log($location);
       $scope.delete = function(){

@@ -37,7 +37,7 @@ exports.get = function(req, res, next){
 };
 
 exports.createInitLoad = function(req, res, next){
-	Customer.find({}, function(err, customers) {
+	Customer.find({ deleted: false }, function(err, customers) {
 		if (err) return next(err);
 		Product.find({}, function(err, products) {
 			if (err) return next(err);
@@ -79,13 +79,28 @@ exports.delete = function(req, res, next){
 	});
 };
 
+
 exports.dashboard = function(req, res, next) {
-	Purchase.find({ status: 'in_progress' })
-		.limit(5)
-		.exec(function(err, purchases) {
-			if (err) return next(err);
-			res.json(purchases);
-		});
+    Purchase.aggregate({ $group: {
+            _id: '$status',
+            count: { $sum: 1 },
+            newest: { $max: '$date' },
+            oldest: { $min: '$date' }
+        }}, function (err, counters) {
+		    if (err) return next(err);
+            Purchase.aggregate({ $match: {
+                    updatedAt: { 
+                        $gt: new  Date(new Date().setHours(0, 0, 0, 0))
+                    }
+                }}, { $group: {
+                    _id: '$status',
+                    count: { $sum: 1 },
+                    modified: { $max: '$updatedAt' }
+                }}, function(err, todayCounters) {
+		            if (err) return next(err);
+                    res.json({ counters: counters, todayCounters: todayCounters });
+            });
+	});
 }
 
 exports.nextstatus = function(req, res, next){
@@ -97,7 +112,6 @@ exports.nextstatus = function(req, res, next){
 		var index = purchaseStatus.indexOf(purchase.status);
 		if (index == -1) return next('Cannot change the status of the purchase, the new state is invalid.');
 		purchase.status = purchaseStatus[index + 1];
-
 		purchase.save(function(err) {
 			if (err) return next(err);
 			return next();

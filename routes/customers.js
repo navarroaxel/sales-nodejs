@@ -12,7 +12,7 @@ exports.list = function(req, res, next) {
 exports.get = function(req, res, next) {
 	Customer.findById(req.params.id, function(err, customer) {
 		if (err) return next(err);
-		if (customer == null){
+		if (customer == null) {
 			res.status(404).send('Customer not found!');
 			return;
 		}
