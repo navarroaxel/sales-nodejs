@@ -142,6 +142,7 @@ angular.module('sales.controllers', []).
   controller('PurchasesIndexCtrl', function ($scope, $http) {
     $http.get('/api/purchases/list')
       .success(function (data, status, headers, config) {
+          debugger;
         $scope.purchases = data.purchases;
         $scope.purchaseStatus = data.purchaseStatus;
         $scope.status = data.purchaseStatus[0];
@@ -229,7 +230,7 @@ angular.module('sales.controllers', []).
       var products = [];
       angular.forEach($scope.purchasedProducts, function(value, key) {
         products.push({
-          product_id: value.product._id,
+          _id: value.product._id,
           quantity: value.quantity,
         });
       });

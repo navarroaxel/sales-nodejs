@@ -1,3 +1,4 @@
+var _ = require("underscore")
 var Customer = require('../models/Customer.js');
 var Product = require('../models/Product.js');
 var Purchase = require('../models/Purchase.js');
@@ -50,19 +51,35 @@ exports.createInitLoad = function(req, res, next){
 };
 
 exports.create = function(req, res, next){
+    if (!req.body.products || req.body.products.length == 0){
+	    res.status(400).send('The purchase should have products.');
+    }
+
 	Customer.findById(req.body._customer, function(err, customer){
 		if (err) return next(err);
 		if (customer == null){
 			res.status(400).send('The customer does not exist.');
 		}
-		Purchase.create({
-		  	status: purchaseStatus[0],
-		  	_customer: customer._id,
-		  	products: req.body.products
-	  	}, function(err, purchase) {
-	  		if (err) return next(err);
-	  		res.end();
-	  	});
+        
+        Product.find({ _id: { $in: req.body.products.map(function(p) { return p._id; }) } }, function (err, products){
+            var purchasedProducts = [];
+            _.each(req.body.products, function(p){
+                var product = _.find(products, function(x){ return x._id == p._id});
+                if (!product) {
+			        res.status(400).send('The product with ID: ' + p._id + ' does not exist.');
+                }
+                purchasedProducts.push({ _product: product._id, quantity: p.quantity, price: product.price });
+            });
+       
+            Purchase.create({
+		  	    status: purchaseStatus[0],
+		  	    _customer: customer._id,
+		  	    products: purchasedProducts
+	  	    }, function(err, purchase) {
+	  		    if (err) return next(err);
+	  		    res.end();
+	  	    });
+        });
 	});
 };
 
@@ -82,6 +99,7 @@ exports.delete = function(req, res, next){
 
 exports.dashboard = function(req, res, next) {
     Purchase.aggregate({ $group: {
+            // group by status
             _id: '$status',
             count: { $sum: 1 },
             newest: { $max: '$date' },
@@ -89,6 +107,7 @@ exports.dashboard = function(req, res, next) {
         }}, function (err, counters) {
 		    if (err) return next(err);
             Purchase.aggregate({ $match: {
+                    // filter updated today
                     updatedAt: { 
                         $gt: new  Date(new Date().setHours(0, 0, 0, 0))
                     }

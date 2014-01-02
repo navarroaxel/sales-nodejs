@@ -6,6 +6,18 @@ angular.module('sales.filters', []).
       return input.replace(RegExp(searchRegex), replaceRegex);
     }
   }).
+  filter('dateTimeFormat', function ($filter) {
+    var ngDateFilter = $filter('date');
+    return function(date) {
+       return ngDateFilter(date, 'yyyy-MM-dd HH:mm');
+    }
+  }).
+  filter('timeFormat', function ($filter) {
+    var ngDateFilter = $filter('date');
+    return function(date) {
+       return ngDateFilter(date, 'HH:mm');
+    }
+  }).
   filter('purchaseStatus', function() {
   	// makes the enum value more readable.
   	return function(input){
@@ -24,7 +36,8 @@ angular.module('sales.filters', []).
   	}
   }).
   filter('fullName', function() {
+    // for customers: concat the name and surname.
     return function(input){
       return input ? input.name + ' ' + input.surname : '';
     }
-  });;
+  });

@@ -8,11 +8,11 @@ var schema = new mongoose.Schema({
     status: { type: String, enum: purchaseStatus },
     deleted: { type: Boolean, default: false, required: true },
     _customer: { type: mongoose.Schema.ObjectId, ref: 'Customer', required: true },
-    products: {
-    	_product: [{ type: mongoose.Schema.ObjectId, ref:'Product' }],
+    products: [{
+    	_product: { type: mongoose.Schema.ObjectId, ref:'Product' },
     	quantity: Number,
     	price: Number
-    }
+    }]
 });
 
 // For more info about the Population (ref) see: http://mongoosejs.com/docs/populate.html

@@ -9,8 +9,8 @@
     <div class="clear-fix itemList" ng-repeat="counter in counters" ng-class-even="'even'" ng-class-odd="'odd'">
         <div>{{ counter._id | purchaseStatus }}</div>
         <div>{{ counter.count }}</div>
-        <div>{{ counter.oldest | date: 'yyyy-MM-dd HH:mm' }}</div>
-        <div>{{ counter.newest | date: 'yyyy-MM-dd HH:mm' }}</div>
+        <div>{{ counter.oldest | dateTimeFormat }}</div>
+        <div>{{ counter.newest | dateTimeFormat }}</div>
     </div>
     <br />
     <br />
@@ -23,7 +23,7 @@
     <div class="clear-fix itemList" ng-repeat="todayCounter in todayCounters" ng-class-even="'even'" ng-class-odd="'odd'">
         <div>{{ todayCounter._id | purchaseStatus }}</div>
         <div>{{ todayCounter.count }}</div>
-        <div>{{ todayCounter.modified | date: 'yyyy-MM-dd HH:mm' }}</div>
+        <div>{{ todayCounter.modified | timeFormat }}</div>
     </div>
     <br />
     <br />
