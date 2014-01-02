@@ -1,3 +1,4 @@
+// http://underscorejs.org/
 var _ = require("underscore")
 var Customer = require('../models/Customer.js');
 var Product = require('../models/Product.js');
@@ -63,8 +64,11 @@ exports.create = function(req, res, next){
         
         Product.find({ _id: { $in: req.body.products.map(function(p) { return p._id; }) } }, function (err, products){
             var purchasedProducts = [];
+            // for each product
             _.each(req.body.products, function(p){
-                var product = _.find(products, function(x){ return x._id == p._id});
+                // find the product with the same id.
+                var product = _.find(products, function(x) { return x._id == p._id});
+                // if the product does not exist it's a bad request.
                 if (!product) {
 			        res.status(400).send('The product with ID: ' + p._id + ' does not exist.');
                 }
