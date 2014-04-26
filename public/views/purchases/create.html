@@ -1,40 +1,45 @@
 <div id="purchases" class="container">
-	<h1>Purchases</h1>
-	<h2>New</h2>
-	<form ng-submit="save()">
-		<input type="hidden" ng-model="purchase._id"/>
-		Customer
-		<select ng-model="customer" ng-options="c | fullName for c in customers">
-		</select>
-		<br/>
-		<input type="number" ng-model="purchaseQuantity" focus="addingProduct" required>
-		<select ng-model="purchaseProduct" ng-options="p.name for p in products" required>
-		</select>
-		<span>{{(purchaseQuantity * purchaseProduct.price || 0) | currency}}</span>
-		<input type="button" ng-click="addProduct()" value="add product" />
-		<div class="headerList">
-			<div>Quantity</div>
-			<div>Product</div>
-			<div>Unit price</div>
-			<div>Subtotal</div>
-			<div>Actions</div>
-		</div>
-		<div class="clear-fix itemList" ng-repeat="purchasedProduct in purchasedProducts" ng-class-odd="'odd'" ng-class-even="'even'">
-			<div>{{purchasedProduct.quantity}}</div>
-			<div>{{purchasedProduct.product.name}}</div>
-			<div>{{purchasedProduct.product.price}}</div>
-			<div>{{purchasedProduct.quantity * purchasedProduct.product.price | currency}}</div>
-			<div>
-				<a ng-click="removeProduct(purchasedProduct.product._id)"><img src="/images/Bin-24.png" alt="Delete" title="Delete"></a>
-			</div>
-		</div>
-		<div class="clear-fix">
-			<br/>
-			<b>Total</b>
-			<span>{{total() | currency}}</span>
-		</div>
-		<br/>
-		<input type="submit" class="button" value="save"/>
-	</form>
-	<a ng-href="/purchases">back</a>
+    <h1>Purchases</h1>
+
+    <h2>New</h2>
+
+    <form ng-submit="save()">
+        <input type="hidden" ng-model="purchase._id"/>
+        Customer
+        <select ng-model="customer" ng-options="c | fullName for c in customers">
+        </select>
+        <br/>
+        <input type="number" ng-model="purchaseQuantity" focus="addingProduct" required>
+        <select ng-model="purchaseProduct" ng-options="p.name for p in products" required>
+        </select>
+        <span>{{(purchaseQuantity * purchaseProduct.price || 0) | currency}}</span>
+        <input type="button" ng-click="addProduct()" value="add product"/>
+
+        <div class="headerList">
+            <div>Quantity</div>
+            <div>Product</div>
+            <div>Unit price</div>
+            <div>Subtotal</div>
+            <div>Actions</div>
+        </div>
+        <div class="clear-fix itemList" ng-repeat="purchasedProduct in purchasedProducts" ng-class-odd="'odd'"
+             ng-class-even="'even'">
+            <div>{{purchasedProduct.quantity}}</div>
+            <div>{{purchasedProduct.product.name}}</div>
+            <div>{{purchasedProduct.product.price}}</div>
+            <div>{{purchasedProduct.quantity * purchasedProduct.product.price | currency}}</div>
+            <div>
+                <a ng-click="removeProduct(purchasedProduct.product._id)"><img src="/images/Bin-24.png" alt="Delete"
+                                                                               title="Delete"></a>
+            </div>
+        </div>
+        <div class="clear-fix">
+            <br/>
+            <b>Total</b>
+            <span>{{total() | currency}}</span>
+        </div>
+        <br/>
+        <input type="submit" class="button" value="save"/>
+    </form>
+    <a ng-href="#/purchases">back</a>
 </div>

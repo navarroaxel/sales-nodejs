@@ -1,4 +1,6 @@
+var app = require('../');
 var should = require('should');
+
 
 describe('Array', function(){
   describe('#indexOf()', function(){

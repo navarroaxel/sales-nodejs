@@ -1,31 +1,34 @@
 <div class="container">
-	<h1>Products</h1>
-	<div ng-switch="!!product._id">
-	    <h2 ng-switch-when="true">Edit</h2>
-	    <h2 ng-switch-when="false">New</h2>
-	</div>
-	<form ng-submit="save()" name="productEditor">
-		<div class="labelsContainer">
-			<div>Name</div>
-			<div>Stock</div>
-			<div>Price</div>
-		</div>
-		<div class="fieldsContainer">
-			<div>
-				<input type="text" name="name" ng-model="product.name" placeholder="name" required ng-minlength="2" ng-maxlenght="40"/>
-				<span class="error" ng-show="productEditor.name.$error.minlength">Too short!</span>
-	    		<span class="error" ng-show="productEditor.name.$error.maxlength">Too long!</span>
-			</div>
-			<div>
-				<input type="number" name="stock" ng-model="product.stock" placeholder="stock" required/>
-			</div>
-			<div>
-				<input type="number" name="price" ng-model="product.price" placeholder="price" required/>
-			</div>
-		</div>
-		<div class="clear-fix">
-			<input type="submit" class="button" value="save"/>
-		</div>
-	</form>
-	<a ng-href="/products">back</a>
+    <h1>Products</h1>
+
+    <div ng-switch="!!product._id">
+        <h2 ng-switch-when="true">Edit</h2>
+
+        <h2 ng-switch-when="false">New</h2>
+    </div>
+    <form ng-submit="save()" name="productEditor">
+        <div class="labelsContainer">
+            <div>Name</div>
+            <div>Stock</div>
+            <div>Price</div>
+        </div>
+        <div class="fieldsContainer">
+            <div>
+                <input type="text" name="name" ng-model="product.name" placeholder="name" required ng-minlength="2"
+                       ng-maxlenght="40"/>
+                <span class="error" ng-show="productEditor.name.$error.minlength">Too short!</span>
+                <span class="error" ng-show="productEditor.name.$error.maxlength">Too long!</span>
+            </div>
+            <div>
+                <input type="number" name="stock" ng-model="product.stock" placeholder="stock" required/>
+            </div>
+            <div>
+                <input type="number" name="price" ng-model="product.price" placeholder="price" required/>
+            </div>
+        </div>
+        <div class="clear-fix">
+            <input type="submit" class="button" value="save"/>
+        </div>
+    </form>
+    <a ng-href="#/products">back</a>
 </div>

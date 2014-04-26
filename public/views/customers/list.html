@@ -1,19 +1,20 @@
 <div class="container">
-	<h1>Customers</h1>
-		<div class="headerList"> 
-			<div>Name</div>
-			<div>Surname</div>
-			<div>Actions</div>
-		</div>
-		<div class="clear-fix itemList" ng-repeat="customer in customers" ng-class-even="'odd'" ng-class-odd="'odd'">
-			<div>{{customer.name}}</div>
-			<div>{{customer.surname}}</div>
-			<div>
-			<a ng-href="/customers/edit/{{customer._id}}"><img src="/images/Edit-24.png" alt="Edit" title="Edit"></a>&nbsp;
-			<a ng-href="/customers/delete/{{customer._id}}"><img src="/images/Bin-24.png" alt="Delete" title="Delete"></a>
-			</div>
-		</div>
-	</br>
-	</br>
-	<a class="button" ng-href="/customers/create">New <img src="/images/Add-24.png"></a>
-<div>
+    <h1>Customers</h1>
+
+    <div class="headerList">
+        <div>Name</div>
+        <div>Surname</div>
+        <div>Actions</div>
+    </div>
+    <div class="clear-fix itemList" ng-repeat="customer in customers" ng-class-even="'odd'" ng-class-odd="'odd'">
+        <div>{{customer.name}}</div>
+        <div>{{customer.surname}}</div>
+        <div>
+            <a ng-href="#/customers/edit/{{customer._id}}"><img src="/images/Edit-24.png" alt="Edit" title="Edit"></a>&nbsp;
+            <a ng-href="#/customers/delete/{{customer._id}}"><img src="/images/Bin-24.png" alt="Delete" title="Delete"></a>
+        </div>
+    </div>
+    </br>
+    </br>
+    <a class="button" ng-href="#/customers/create">New <img src="/images/Add-24.png"></a>
+</div>

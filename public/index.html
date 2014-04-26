@@ -1,36 +1,36 @@
 <html>
 <head>
-	<title>Sales app</title>
-	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <title>Sales app</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 </head>
 <body>
-	<div ng-app="sales">
-		<header>
-			<div class="tab">
-				<a ng-href="/">Home</a>
-				<a ng-href="/customers">Customers</a>
-				<a ng-href="/products">Products</a>
-				<a ng-href="/purchases">Purchases</a>
-			</div>
-		</header>
-		<section>
-			<div ng-controller="AlertDemoCtrl">
-				<alert ng-repeat="alert in alerts" type="alert.type">{{alert.message}}</alert>
-			</div>
-			<div ng-view></div>
-		</section>
-	</div>
-	<footer>
-		<div>
-			© 2013
-		</div>
-	</footer>
-	<script src="/javascripts/angular.js"></script>
-	<script src="/javascripts/ui-bootstrap-tpls-0.6.0.js"></script>
-	<script src="/javascripts/app.js"></script>
-	<script src="/javascripts/services.js"></script>
-	<script src="/javascripts/controllers.js"></script>
-	<script src="/javascripts/filters.js"></script>
-	<script src="/javascripts/directives.js"></script>
+<div ng-app="sales">
+    <header>
+        <div class="tab">
+            <a ng-href="/">Home</a>
+            <a ng-href="#/customers">Customers</a>
+            <a ng-href="#/products">Products</a>
+            <a ng-href="#/purchases">Purchases</a>
+        </div>
+    </header>
+    <section>
+        <div ng-controller="AlertDemoCtrl">
+            <alert ng-repeat="alert in alerts" type="alert.type">{{alert.message}}</alert>
+        </div>
+        <div ng-view></div>
+    </section>
+</div>
+<footer>
+    <div>
+        © 2013
+    </div>
+</footer>
+<script src="/javascripts/angular.js"></script>
+<script src="/javascripts/ui-bootstrap-tpls-0.6.0.js"></script>
+<script src="/javascripts/app.js"></script>
+<script src="/javascripts/services.js"></script>
+<script src="/javascripts/controllers.js"></script>
+<script src="/javascripts/filters.js"></script>
+<script src="/javascripts/directives.js"></script>
 </body>
 </html>

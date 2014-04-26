@@ -1,26 +1,29 @@
 <div class="container">
-<h1>Purchases</h1>
-<h2>Delete</h2>
-<div>
-	<b>Customer</b>
-	<span>{{purchase.customer.name}} {{purchase.customer.surname}}</span>
+    <h1>Purchases</h1>
+
+    <h2>Delete</h2>
+
+    <div>
+        <b>Customer</b>
+        <span>{{purchase.customer.name}} {{purchase.customer.surname}}</span>
+    </div>
+    <div>
+        <b>Date</b>
+        <span>{{purchase.date}}</span>
+    </div>
+    <div>
+        <b>Products</b>
+        <ul>
+            <li ng-repeat="product in purchase.products">
+                <span>{{product.quantity}}</span>
+                <span>{{product.name}}</span>
+                <span>{{product.price | currency}}</span>
+                <span>{{product.quantity * product.price | currency}}</span>
+            </li>
+        </ul>
+    </div>
+    <form ng-submit="delete()">
+        <input type="submit" class="button" value="delete"/>
+    </form>
+    <a href="#/products">back</a>
 </div>
-<div>
-	<b>Date</b>
-	<span>{{purchase.date}}</span>
-</div>
-<div>
-	<b>Products</b>
-	<ul>
-		<li ng-repeat="product in purchase.products">
-			<span>{{product.quantity}}</span>
-			<span>{{product.name}}</span>
-			<span>{{product.price | currency}}</span>
-			<span>{{product.quantity * product.price | currency}}</span>
-		</li>
-	</ul>
-</div>
-<form ng-submit="delete()">
-	<input type="submit" class="button" value="delete"/>
-</form>
-<a href="/products">back</a>
