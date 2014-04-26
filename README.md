@@ -1,7 +1,9 @@
 sales-nodejs
 ============
 
-A sales app made in node.js + AngularJS + MongoDB
+A sales app made in MongoDB + Express + AngularJS + Node.js
+
+MEAN is a full-stack JavaScript platform designed for web applications. More info: http://en.wikipedia.org/wiki/MEAN
 
 This is a simple web application that I would love to have available when I started with Node.js. With this you can see how to use:
 * How to use Express framework without rendering (The HTML templates are rendered by AngularJS).
